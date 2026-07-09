@@ -17,13 +17,32 @@ export const Header = () => {
     { label: t.contact, href: '#contact' },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <header className={styles.header}>
-      <a href="#" className={styles.logo}>Elysson Alves.</a>
+      <a
+        href="#"
+        className={styles.logo}
+        onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+      >
+        Elysson Alves.
+      </a>
       
       <nav className={styles.nav}>
         {navItems.map((item) => (
-          <a key={item.href} href={item.href} className={styles.navLink}>
+          <a
+            key={item.href}
+            href={item.href}
+            className={styles.navLink}
+            onClick={(e) => handleNavClick(e, item.href)}
+          >
             {item.label}
           </a>
         ))}

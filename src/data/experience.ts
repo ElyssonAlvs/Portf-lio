@@ -1,7 +1,7 @@
 export const experiences = [
   {
     role: { pt: "Desenvolvedor Full Stack", en: "Full Stack Developer" },
-    company: "UFC NPI",
+    company: "NPI – Núcleo de Práticas em Informática (UFC)",
     period: { pt: "Set 2025 – Atual", en: "Sep 2025 – Present" },
     description: { 
       pt: "Desenvolvimento de prontuário eletrônico odontológico e de uma plataforma para o PDI utilizando metodologia Scrum. Integração backend/frontend, modelagem de entidades e alinhamento direto com stakeholders.", 

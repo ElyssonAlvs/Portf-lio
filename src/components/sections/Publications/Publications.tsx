@@ -119,6 +119,7 @@ const PublicationCard = ({ pub, index, language }: { pub: Publication; index: nu
   const motionProps = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
+    whileHover: { y: -5, transition: { duration: 0.2 } },
     viewport: { once: true, margin: "-80px" },
     transition: { duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
   };
