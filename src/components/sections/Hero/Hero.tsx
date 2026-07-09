@@ -2,6 +2,7 @@ import { useLanguage } from '../../../contexts/LanguageContext';
 import { translations } from '../../../i18n/translations';
 import { AnimatedSection } from '../../ui/AnimatedSection/AnimatedSection';
 import { Button } from '../../ui/button';
+import cvFile from '../../../assets/cv/Elysson_Alves_CV.pdf';
 
 export const Hero = () => {
   const { language } = useLanguage();
@@ -20,7 +21,7 @@ export const Hero = () => {
           </a>
         </Button>
         <Button asChild variant="outline" size="lg" className="border border-border rounded-md font-medium transition-colors">
-          <a href={`${import.meta.env.BASE_URL}cv/Elysson_Alves_CV.pdf`} download>
+          <a href={cvFile} download="Elysson_Alves_CV.pdf">
             {t.cta_cv}
           </a>
         </Button>
