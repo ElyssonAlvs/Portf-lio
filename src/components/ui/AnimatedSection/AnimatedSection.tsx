@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 
 interface AnimatedSectionProps {
@@ -6,9 +6,10 @@ interface AnimatedSectionProps {
   id?: string;
   className?: string;
   delay?: number;
+  style?: CSSProperties;
 }
 
-export const AnimatedSection = ({ children, id, className, delay = 0 }: AnimatedSectionProps) => {
+export const AnimatedSection = ({ children, id, className, delay = 0, style }: AnimatedSectionProps) => {
   return (
     <motion.section
       id={id}
@@ -17,7 +18,7 @@ export const AnimatedSection = ({ children, id, className, delay = 0 }: Animated
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
-      style={{ padding: '80px 0' }}
+      style={{ padding: '80px 0', ...style }}
     >
       {children}
     </motion.section>
