@@ -1,0 +1,154 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+@media (max-width: 680px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardWrapper {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+}
+
+.cardClickable:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.cardClickable:hover .cardLink {
+  opacity: 1;
+}
+
+.cardAwarded {
+  border-color: var(--accent-border);
+  background: linear-gradient(135deg, var(--accent-bg) 0%, var(--bg) 60%);
+}
+
+.cardAccent {
+  flex-shrink: 0;
+  width: 3px;
+  align-self: stretch;
+  background: var(--accent);
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.cardAwarded .cardAccent {
+  opacity: 1;
+}
+
+.cardClickable:hover .cardAccent {
+  opacity: 1;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 16px;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.typeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 11.5px;
+  font-family: var(--mono);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+.awardBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+.cardTitle {
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text-h);
+  margin: 0;
+  letter-spacing: -0.1px;
+}
+
+.cardVenue {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.venueName {
+  font-size: 12px;
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.2px;
+}
+
+.venueFullName {
+  font-size: 11.5px;
+  color: var(--text);
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.cardLink {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 14px 14px 0;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  align-self: center;
+}

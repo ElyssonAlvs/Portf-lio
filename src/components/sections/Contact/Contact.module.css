@@ -1,0 +1,31 @@
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.description {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+
+.socials {
+  display: flex;
+  gap: 24px;
+}
+
+.socialLink {
+  color: var(--text-muted);
+  transition: var(--transition-smooth);
+}
+
+.socialLink:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
