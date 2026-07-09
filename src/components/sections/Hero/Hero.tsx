@@ -20,7 +20,7 @@ export const Hero = () => {
           </a>
         </Button>
         <Button asChild variant="outline" size="lg" className="border border-border rounded-md font-medium transition-colors">
-          <a href="/cv/Elysson_Alves_CV.pdf" download>
+          <a href={`${import.meta.env.BASE_URL}cv/Elysson_Alves_CV.pdf`} download>
             {t.cta_cv}
           </a>
         </Button>
