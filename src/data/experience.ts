@@ -1,4 +1,12 @@
-export const experiences = [
+export interface Experience {
+  role: { pt: string; en: string };
+  company: string;
+  period: { pt: string; en: string };
+  description: { pt: string; en: string };
+  tags: (string | { pt: string; en: string })[];
+}
+
+export const experiences: Experience[] = [
   {
     role: { pt: "Desenvolvedor Full Stack", en: "Full Stack Developer" },
     company: "NPI – Núcleo de Práticas em Informática (UFC)",
@@ -7,7 +15,7 @@ export const experiences = [
       pt: "Desenvolvimento de prontuário eletrônico odontológico e de uma plataforma para o PDI utilizando metodologia Scrum. Integração backend/frontend, modelagem de entidades e alinhamento direto com stakeholders.", 
       en: "Development of an electronic dental record system and a platform for the IDP (Institutional Development Plan) using Scrum methodology. Backend/frontend integration, entity modeling, and direct alignment with stakeholders." 
     },
-    tags: ["React", "Scrum", "Backend", "SQL"]
+    tags: ["React", "Scrum", { pt: "Backend", en: "Backend" }, "SQL"]
   },
   {
     role: { pt: "Gerente de Projetos", en: "Project Manager" },
@@ -17,7 +25,7 @@ export const experiences = [
       pt: "Gestão de projetos educacionais, de pesquisa e extensão. Coordenação de bolsistas, reuniões semanais e uso de ferramentas ágeis.", 
       en: "Management of educational, research, and extension projects. Coordination of scholarship holders, weekly meetings, and use of agile tools." 
     },
-    tags: ["Gestão Ágil", "Liderança", "ClickUp"]
+    tags: [{ pt: "Gestão Ágil", en: "Agile Management" }, { pt: "Liderança", en: "Leadership" }, "ClickUp"]
   },
   {
     role: { pt: "Conselheiro", en: "Counselor" },
@@ -27,7 +35,7 @@ export const experiences = [
       pt: "Governança corporativa e compliance. Emissão de pareceres, análise de riscos e apoio estratégico à tomada de decisão.", 
       en: "Corporate governance and compliance. Issuance of opinions, risk analysis, and strategic support for decision-making." 
     },
-    tags: ["Governança", "Compliance", "Análise de Riscos"]
+    tags: [{ pt: "Governança", en: "Governance" }, "Compliance", { pt: "Análise de Riscos", en: "Risk Analysis" }]
   },
   {
     role: { pt: "Gerente de Finanças", en: "Finance Manager" },
@@ -37,7 +45,7 @@ export const experiences = [
       pt: "Controle e planejamento do fluxo de caixa. Elaboração de balanços semestrais para decisões estratégicas.", 
       en: "Cash flow control and planning. Preparation of semi-annual balance sheets for strategic decisions." 
     },
-    tags: ["Finanças", "Google Sheets", "Planejamento"]
+    tags: [{ pt: "Finanças", en: "Finance" }, "Google Sheets", { pt: "Planejamento", en: "Planning" }]
   },
   {
     role: { pt: "Bolsista de Pesquisa e Extensão", en: "Research and Extension Scholarship Holder" },
@@ -47,6 +55,7 @@ export const experiences = [
       pt: "Projetos de ensino, pesquisa e extensão. Organização de palestras, minicursos e eventos para a comunidade acadêmica.", 
       en: "Teaching, research, and extension projects. Organization of lectures, short courses, and events for the academic community." 
     },
-    tags: ["Pesquisa", "Extensão", "Ensino"]
+    tags: [{ pt: "Pesquisa", en: "Research" }, { pt: "Extensão", en: "Extension" }, { pt: "Ensino", en: "Teaching" }]
   }
 ]
+

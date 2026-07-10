@@ -46,9 +46,10 @@ export const Experience = () => {
                 </CardContent>
                 <CardFooter>
                   <div className="flex flex-wrap gap-2">
-                    {exp.tags.map(tag => (
-                      <Tag key={tag} label={tag} />
-                    ))}
+                    {exp.tags.map(tag => {
+                      const label = typeof tag === 'string' ? tag : tag[language];
+                      return <Tag key={label} label={label} />;
+                    })}
                   </div>
                 </CardFooter>
               </Card>
