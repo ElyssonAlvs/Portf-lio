@@ -1,14 +1,21 @@
-export const projects = [
+export interface Project {
+  name: string;
+  description: { pt: string; en: string };
+  tags: (string | { pt: string; en: string })[];
+  url: string;
+}
+
+export const projects: Project[] = [
   {
     name: "FinanceBOT",
     description: { pt: "Bot de análise e controle financeiro automatizado.", en: "Automated financial analysis and control bot." },
-    tags: ["Python", "Bot", "Automação"],
+    tags: ["Python", { pt: "Bot", en: "Bot" }, { pt: "Automação", en: "Automation" }],
     url: "https://github.com/ElyssonAlvs/FinanceBOT"
   },
   {
     name: "TaskAgent",
     description: { pt: "Agente de IA para planejamento e execução de tarefas.", en: "AI agent for task planning and execution." },
-    tags: ["Python", "IA", "Agentes LLM"],
+    tags: ["Python", { pt: "IA", en: "AI" }, { pt: "Agentes LLM", en: "LLM Agents" }],
     url: "https://github.com/ElyssonAlvs/TaskAgent"
   },
   {
@@ -26,7 +33,7 @@ export const projects = [
   {
     name: "Mineração de Dados",
     description: { pt: "Projeto acadêmico de análise e mineração de dados com Python.", en: "Academic data mining and analysis project using Python." },
-    tags: ["Python", "Data Mining", "Pandas"],
+    tags: ["Python", { pt: "Mineração de Dados", en: "Data Mining" }, "Pandas"],
     url: "https://github.com/ElyssonAlvs/Mineracao-de-Dados"
   },
   {
@@ -36,3 +43,4 @@ export const projects = [
     url: "https://github.com/ElyssonAlvs/dslist"
   }
 ]
+

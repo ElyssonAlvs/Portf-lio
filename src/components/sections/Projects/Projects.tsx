@@ -64,9 +64,10 @@ export const Projects = () => {
               </CardContent>
               <CardFooter>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map(tag => (
-                    <Tag key={tag} label={tag} />
-                  ))}
+                  {project.tags.map((tag) => {
+                    const label = typeof tag === 'string' ? tag : tag[language];
+                    return <Tag key={label} label={label} />;
+                  })}
                 </div>
               </CardFooter>
             </Card>

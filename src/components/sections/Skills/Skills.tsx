@@ -33,9 +33,10 @@ export const Skills = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {category.items.map(item => (
-                    <Tag key={item} label={item} />
-                  ))}
+                  {category.items.map(item => {
+                    const label = typeof item === 'string' ? item : item[language];
+                    return <Tag key={label} label={label} />;
+                  })}
                 </div>
               </CardContent>
             </Card>
