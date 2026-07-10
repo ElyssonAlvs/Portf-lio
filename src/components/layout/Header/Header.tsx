@@ -31,7 +31,7 @@ export const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
   }, []);
 
   const navItems = [
-    { id: 'about', label: t.about },
+    { id: 'home', label: t.home },
     { id: 'experience', label: t.experience },
     { id: 'skills', label: t.skills },
     { id: 'projects', label: t.projects },
