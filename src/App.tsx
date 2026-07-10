@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useLanguage } from './contexts/LanguageContext'
 import { Header } from './components/layout/Header/Header'
 import { Footer } from './components/layout/Footer/Footer'
@@ -12,6 +13,7 @@ import { Contact } from './components/sections/Contact/Contact'
 
 function App() {
   const { language } = useLanguage()
+  const [activeTab, setActiveTab] = useState('home')
 
   useEffect(() => {
     // Update HTML lang attribute
@@ -52,17 +54,28 @@ function App() {
   }, [language])
 
   return (
-    <div style={{ paddingTop: '80px' }}>
-      <Header />
+    <div style={{ paddingTop: '80px', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="container">
-        <Hero />
-        <About />
-        <Experience />
-        <Skills />
-        <Projects />
-        <Publications />
-        <Contact />
+      <main className="container flex-grow py-8 md:py-12" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            style={{ width: '100%' }}
+          >
+            {activeTab === 'home' && <Hero setActiveTab={setActiveTab} />}
+            {activeTab === 'about' && <About />}
+            {activeTab === 'experience' && <Experience />}
+            {activeTab === 'skills' && <Skills />}
+            {activeTab === 'projects' && <Projects />}
+            {activeTab === 'publications' && <Publications />}
+            {activeTab === 'contact' && <Contact />}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       <Footer />
