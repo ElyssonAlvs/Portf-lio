@@ -8,9 +8,19 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    role: { pt: "Desenvolvedor Backend", en: "Backend Developer" },
+    company: "SpeeedMed",
+    period: { pt: "Maio 2026 – Atual", en: "May 2026 – Present" },
+    description: { 
+      pt: "Desenvolvimento do backend da plataforma SaaS SpeedMed para gestão de clínicas. Implementação de APIs REST com NestJS, Prisma ORM e PostgreSQL. Atuação em arquitetura monorepo com Turborepo, Docker e testes automatizados.", 
+      en: "Backend development for the SpeedMed SaaS clinic management platform. Implementation of REST APIs with NestJS, Prisma ORM, and PostgreSQL. Monorepo architecture with Turborepo, Docker, and automated testing." 
+    },
+    tags: ["NestJS", "Prisma", "PostgreSQL", "Docker", "Turborepo"]
+  },
+  {
     role: { pt: "Desenvolvedor Full Stack", en: "Full Stack Developer" },
-    company: "NPI – Núcleo de Práticas em Informática (UFC)",
-    period: { pt: "Set 2025 – Atual", en: "Sep 2025 – Present" },
+    company: "Universidade Federal do Ceará",
+    period: { pt: "Set 2025 – Jul 2026", en: "Sep 2025 – Jul 2026" },
     description: { 
       pt: "Desenvolvimento de prontuário eletrônico odontológico e de uma plataforma para o PDI utilizando metodologia Scrum. Integração backend/frontend, modelagem de entidades e alinhamento direto com stakeholders.", 
       en: "Development of an electronic dental record system and a platform for the IDP (Institutional Development Plan) using Scrum methodology. Backend/frontend integration, entity modeling, and direct alignment with stakeholders." 
@@ -48,14 +58,13 @@ export const experiences: Experience[] = [
     tags: [{ pt: "Finanças", en: "Finance" }, "Google Sheets", { pt: "Planejamento", en: "Planning" }]
   },
   {
-    role: { pt: "Bolsista de Pesquisa e Extensão", en: "Research and Extension Scholarship Holder" },
+    role: { pt: "Bolsista", en: "Scholarship Holder" },
     company: "PET-SI UFC Quixadá",
     period: { pt: "Mar 2024 – Atual", en: "Mar 2024 – Present" },
     description: { 
-      pt: "Projetos de ensino, pesquisa e extensão. Organização de palestras, minicursos e eventos para a comunidade acadêmica.", 
-      en: "Teaching, research, and extension projects. Organization of lectures, short courses, and events for the academic community." 
+      pt: "Atuação no Programa de Educação Tutorial (PET), contribuindo com atividades de Ensino, Pesquisa e Extensão com foco em interdisciplinaridade e aprendizagem cooperativa.", 
+      en: "Participation in the Tutorial Education Program (PET), contributing to Teaching, Research, and Extension activities focused on interdisciplinarity and cooperative learning." 
     },
     tags: [{ pt: "Pesquisa", en: "Research" }, { pt: "Extensão", en: "Extension" }, { pt: "Ensino", en: "Teaching" }]
   }
 ]
-

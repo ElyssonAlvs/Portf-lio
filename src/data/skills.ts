@@ -14,11 +14,10 @@ export const skillCategories: SkillCategory[] = [
   },
   { 
     category: { pt: "Desenvolvimento", en: "Development" }, 
-    items: ["Python", "Java", "React", "TypeScript", "Git"] 
+    items: ["Python", "Java", "TypeScript", "React", "NestJS", "Prisma", "Docker"] 
   },
   { 
     category: { pt: "Gestão", en: "Management" }, 
     items: ["Scrum", "ClickUp", "Trello", "Height", "Slack"] 
   }
 ]
-

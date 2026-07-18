@@ -18,10 +18,9 @@ function App() {
     // Update HTML lang attribute
     document.documentElement.lang = language
 
-    // Update document title
     document.title = language === 'pt'
-      ? 'Elysson Alves | Desenvolvedor Full Stack & Engenheiro de IA'
-      : 'Elysson Alves | Full Stack Developer & AI Engineer'
+      ? 'Elysson Alves | Desenvolvedor Backend & Full Stack'
+      : 'Elysson Alves | Backend & Full Stack Developer'
 
     // Update meta description
     let metaDesc = document.querySelector('meta[name="description"]')
@@ -33,8 +32,8 @@ function App() {
     metaDesc.setAttribute(
       'content',
       language === 'pt'
-        ? 'Portfólio de Elysson Alves, estudante de Sistemas de Informação na UFC e Desenvolvedor Full Stack no NPI. Especialista em IA, Automação e Sistemas Multiagentes.'
-        : 'Portfolio of Elysson Alves, Information Systems student at UFC and Full Stack Developer at NPI. Specialist in AI, Automation, and Multi-Agent Systems.'
+        ? 'Portfólio de Elysson Alves, estudante de Sistemas de Informação na UFC, Desenvolvedor Backend na SpeedMed e Full Stack no NPI. Especialista em IA, Automação e Sistemas Multiagentes.'
+        : 'Portfolio of Elysson Alves, Information Systems student at UFC, Backend Developer at SpeedMed and Full Stack at NPI. Specialist in AI, Automation, and Multi-Agent Systems.'
     )
 
     // Update meta keywords
@@ -47,8 +46,8 @@ function App() {
     metaKeywords.setAttribute(
       'content',
       language === 'pt'
-        ? 'desenvolvedor full stack, engenheiro de ia, sistemas multiagentes, inteligência artificial, react, python, ufc, npi, automação'
-        : 'full stack developer, ai engineer, multi-agent systems, artificial intelligence, react, python, ufc, npi, automation'
+        ? 'desenvolvedor backend, desenvolvedor full stack, engenheiro de ia, sistemas multiagentes, inteligência artificial, react, python, nestjs, ufc, automação'
+        : 'backend developer, full stack developer, ai engineer, multi-agent systems, artificial intelligence, react, python, nestjs, ufc, automation'
     )
   }, [language])
 
