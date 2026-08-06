@@ -31,19 +31,19 @@ export const Hero = ({ setActiveTab }: HeroProps) => {
             {tHero.role}
           </h2>
           
-          <div className="flex flex-wrap gap-3 mt-1">
-            <Button onClick={() => setActiveTab('projects')} size="default" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md font-medium transition-colors">
+          <div className="flex flex-nowrap items-center gap-2 sm:gap-3 mt-1 overflow-x-auto no-scrollbar pb-1">
+            <Button onClick={() => setActiveTab('projects')} size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md font-medium transition-colors shrink-0 whitespace-nowrap">
               {language === 'pt' ? 'Ver Projetos' : 'View Projects'}
             </Button>
-            <Button onClick={() => setActiveTab('contact')} variant="outline" size="default" className="border border-border rounded-md font-medium transition-colors">
+            <Button onClick={() => setActiveTab('contact')} variant="outline" size="sm" className="border border-border rounded-md font-medium transition-colors shrink-0 whitespace-nowrap">
               {tHero.cta_contact}
             </Button>
-            <Button asChild variant="outline" size="default" className="border border-border rounded-md font-medium transition-colors">
+            <Button asChild variant="outline" size="sm" className="border border-border rounded-md font-medium transition-colors shrink-0 whitespace-nowrap">
               <a href={cvFile} download="Elysson_Alves_CV.pdf">
                 {tHero.cta_cv}
               </a>
             </Button>
-            <Button asChild variant="ghost" size="default" className="rounded-md font-medium transition-colors text-muted-foreground hover:text-foreground">
+            <Button asChild variant="ghost" size="sm" className="rounded-md font-medium transition-colors text-muted-foreground hover:text-foreground shrink-0 whitespace-nowrap">
               <a href="https://github.com/ElyssonAlvs" target="_blank" rel="noreferrer">
                 {tHero.cta_github}
               </a>
