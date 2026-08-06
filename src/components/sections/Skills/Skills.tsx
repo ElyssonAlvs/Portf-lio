@@ -23,11 +23,11 @@ export const Skills = () => {
             className={styles.categoryCard}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.2 } }}
+            whileHover={{ y: -4, transition: { duration: 0.2 } }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Card className="h-full bg-surface/50 border-border/50">
+            <Card className="h-full">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg text-primary/80">{category.category[language]}</CardTitle>
               </CardHeader>

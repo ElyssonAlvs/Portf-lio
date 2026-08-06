@@ -25,16 +25,17 @@
   gap: 0;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--bg);
+  background: var(--surface);
+  backdrop-filter: blur(12px);
   overflow: hidden;
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   height: 100%;
 }
 
 .cardClickable:hover {
-  border-color: var(--accent-border);
+  border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.12);
 }
 
 .cardClickable:hover .cardLink {
@@ -42,25 +43,12 @@
 }
 
 .cardAwarded {
-  border-color: var(--accent-border);
-  background: linear-gradient(135deg, var(--accent-bg) 0%, var(--bg) 60%);
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, var(--surface) 100%);
 }
 
 .cardAccent {
-  flex-shrink: 0;
-  width: 3px;
-  align-self: stretch;
-  background: var(--accent);
-  opacity: 0.5;
-  transition: opacity 0.2s ease;
-}
-
-.cardAwarded .cardAccent {
-  opacity: 1;
-}
-
-.cardClickable:hover .cardAccent {
-  opacity: 1;
+  display: none;
 }
 
 .cardBody {
@@ -86,11 +74,11 @@
   gap: 5px;
   padding: 3px 10px;
   border-radius: 99px;
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-  color: var(--text);
+  background: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  color: var(--text-secondary);
   font-size: 11.5px;
-  font-family: var(--mono);
+  font-family: var(--font-mono);
   font-weight: 500;
   letter-spacing: 0.3px;
   line-height: 1;
@@ -102,8 +90,8 @@
   gap: 5px;
   padding: 3px 10px;
   border-radius: 99px;
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
   color: var(--accent);
   font-size: 11.5px;
   font-weight: 600;
@@ -115,7 +103,7 @@
   font-size: 14.5px;
   font-weight: 600;
   line-height: 1.45;
-  color: var(--text-h);
+  color: var(--text-primary);
   margin: 0;
   letter-spacing: -0.1px;
 }
@@ -128,7 +116,7 @@
 
 .venueName {
   font-size: 12px;
-  font-family: var(--mono);
+  font-family: var(--font-mono);
   font-weight: 600;
   color: var(--accent);
   letter-spacing: 0.2px;
@@ -136,8 +124,8 @@
 
 .venueFullName {
   font-size: 11.5px;
-  color: var(--text);
-  opacity: 0.8;
+  color: var(--text-muted);
+  opacity: 1;
   line-height: 1.4;
 }
 

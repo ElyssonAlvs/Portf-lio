@@ -42,7 +42,7 @@ export const Contact = () => {
             : "I'm always open to new opportunities and connections. Whether you have a question, a project proposal, or just want to say hi, I'll try my best to get back to you."}
         </p>
 
-        <Button onClick={handleCopyEmail} size="lg" className="rounded-full gap-2 mb-12" variant="outline">
+        <Button onClick={handleCopyEmail} size="lg" className="rounded-full gap-2 mb-6" variant="outline">
           <MailIcon />
           {copied ? t.email_copied : email}
         </Button>

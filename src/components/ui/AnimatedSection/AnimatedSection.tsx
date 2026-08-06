@@ -18,7 +18,7 @@ export const AnimatedSection = ({ children, id, className, delay = 0, style }: A
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
-      style={{ padding: '40px 0', ...style }}
+      style={{ padding: '12px 0', ...style }}
     >
       {children}
     </motion.section>

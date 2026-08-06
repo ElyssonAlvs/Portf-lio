@@ -19,8 +19,8 @@ function App() {
     document.documentElement.lang = language
 
     document.title = language === 'pt'
-      ? 'Elysson Alves | Desenvolvedor Backend & Full Stack'
-      : 'Elysson Alves | Backend & Full Stack Developer'
+      ? 'Elysson Alves | Engenheiro de IA'
+      : 'Elysson Alves | AI Engineer'
 
     // Update meta description
     let metaDesc = document.querySelector('meta[name="description"]')
@@ -51,11 +51,15 @@ function App() {
     )
   }, [language])
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior })
+  }, [activeTab])
+
   return (
     <div style={{ paddingTop: '80px', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="container flex-grow py-8 md:py-12" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <main className="container flex-grow py-4 md:py-6" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}

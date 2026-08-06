@@ -55,35 +55,32 @@ export const Projects = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Card className="h-full flex flex-col group-hover:border-primary transition-all duration-300 overflow-hidden relative">
+            <Card className="h-full flex flex-col group-hover:border-primary transition-colors duration-300 overflow-hidden relative">
               {project.image && (
-                <div className="h-32 w-full bg-muted overflow-hidden relative border-b border-border">
-                   <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10" />
-                   <img src={getImageUrl(project.image)} alt={project.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="h-48 md:h-56 w-full bg-muted overflow-hidden relative border-b border-border">
+                   <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent z-10 pointer-events-none" />
+                   <img src={getImageUrl(project.image)} alt={project.name} className="w-full h-full object-cover group-hover:opacity-95 transition-opacity duration-300" />
                 </div>
               )}
-              <CardHeader className={project.image ? "pt-4" : ""}>
+              <CardHeader className={project.image ? "pt-5 pb-2" : "pt-6 pb-2"}>
                 <div className="flex items-start justify-between gap-4">
-                  <CardTitle className="text-xl leading-tight">{project.name}</CardTitle>
-                  <div className="text-muted-foreground shrink-0 group-hover:text-primary transition-colors">
+                  <CardTitle className="text-2xl font-bold leading-snug">{project.name}</CardTitle>
+                  <div className="text-muted-foreground shrink-0 group-hover:text-primary transition-colors mt-1">
                     <ExternalIcon />
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="flex-grow">
-                <CardDescription className="text-base line-clamp-3">
+              <CardContent className="flex-grow pb-4">
+                <CardDescription className="text-base text-muted-foreground leading-relaxed">
                   {project.description[language]}
                 </CardDescription>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="pt-2">
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.slice(0, 3).map((tag) => {
+                  {project.tags.map((tag) => {
                     const label = typeof tag === 'string' ? tag : tag[language];
                     return <Tag key={label} label={label} />;
                   })}
-                  {project.tags.length > 3 && (
-                    <span className="text-xs text-muted-foreground flex items-center">+{project.tags.length - 3}</span>
-                  )}
                 </div>
               </CardFooter>
             </Card>

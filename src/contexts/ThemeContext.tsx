@@ -15,8 +15,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     if (savedTheme === 'light' || savedTheme === 'dark') {
       return savedTheme;
     }
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDark ? 'dark' : 'light';
+    return 'dark'; // Padrão: Tema Escuro
   });
 
   useEffect(() => {

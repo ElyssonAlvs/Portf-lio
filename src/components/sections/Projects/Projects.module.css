@@ -1,12 +1,12 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 28px;
 }
 
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }
 }
