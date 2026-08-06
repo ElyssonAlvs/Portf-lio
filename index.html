@@ -1,11 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt" class="dark" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
+          } else {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/robot.svg?v=3" />
     <link rel="shortcut icon" type="image/svg+xml" href="/robot.svg?v=3" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
+    <title>Elysson Alves | Engenheiro de IA</title>
   </head>
   <body>
     <div id="root"></div>
