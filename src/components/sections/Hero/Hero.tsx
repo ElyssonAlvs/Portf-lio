@@ -39,13 +39,13 @@ export const Hero = ({ setActiveTab }: HeroProps) => {
               {tHero.cta_contact}
             </Button>
             <Button asChild variant="outline" size="sm" className="border border-border rounded-md font-medium transition-colors shrink-0 whitespace-nowrap">
-              <a href={cvFile} download="Elysson_Alves_CV.pdf">
-                {tHero.cta_cv}
-              </a>
-            </Button>
-            <Button asChild variant="ghost" size="sm" className="rounded-md font-medium transition-colors text-muted-foreground hover:text-foreground shrink-0 whitespace-nowrap">
               <a href="https://github.com/ElyssonAlvs" target="_blank" rel="noreferrer">
                 {tHero.cta_github}
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="border border-border rounded-md font-medium transition-colors shrink-0 whitespace-nowrap">
+              <a href={cvFile} download="Elysson_Alves_CV.pdf">
+                {tHero.cta_cv}
               </a>
             </Button>
           </div>
