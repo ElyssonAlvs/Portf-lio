@@ -6,7 +6,7 @@ export interface SkillCategory {
 export const skillCategories: SkillCategory[] = [
   { 
     category: { pt: "IA & Automação", en: "AI & Automation" }, 
-    items: ["RAG", "n8n", "FastAPI", { pt: "IA Prompting", en: "AI Prompting" }, { pt: "Agentes LLM", en: "LLM Agents" }] 
+    items: ["RAG", "LangGraph", "CrewAI", "n8n", "FastAPI", { pt: "IA Prompting", en: "AI Prompting" }, { pt: "Agentes LLM", en: "LLM Agents" }] 
   },
   { 
     category: { pt: "Dados", en: "Data" }, 
