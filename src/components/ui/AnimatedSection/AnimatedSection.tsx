@@ -9,16 +9,16 @@ interface AnimatedSectionProps {
   style?: CSSProperties;
 }
 
-export const AnimatedSection = ({ children, id, className, delay = 0, style }: AnimatedSectionProps) => {
+export const AnimatedSection = ({ children, id, className = '', delay = 0, style }: AnimatedSectionProps) => {
   return (
     <motion.section
       id={id}
-      className={className}
+      className={`scroll-mt-24 ${className}`.trim()}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
-      style={{ padding: '12px 0', ...style }}
+      style={{ padding: '24px 0', ...style }}
     >
       {children}
     </motion.section>

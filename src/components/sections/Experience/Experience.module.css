@@ -1,41 +1,107 @@
-.timeline {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 16px 0;
+.container {
+  width: 100%;
 }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 20px;
-  width: 2px;
-  background-color: var(--border);
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
 }
 
-.timelineItem {
-  position: relative;
-  padding-left: 60px;
-  margin-bottom: 60px;
+.tabBtn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding-bottom: 8px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.timelineItem:last-child {
-  margin-bottom: 0;
+.tabBtn:hover {
+  color: var(--text-primary);
 }
 
-.timelineDot {
-  position: absolute;
-  left: 15px;
-  top: 6px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--bg);
+.tabBtn.active {
+  color: var(--text-primary);
+  font-weight: 700;
+  border-bottom-color: var(--accent);
 }
 
-.timelineContent {
-  /* wrapper for card */
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 640px) {
+  .item {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 32px;
+  }
+}
+
+.period {
+  width: 140px;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+@media (min-width: 640px) {
+  .period {
+    margin-bottom: 0;
+  }
+}
+
+.content {
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.role {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.company {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  max-width: 88ch;
+}
+
+.techStack {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.5;
 }

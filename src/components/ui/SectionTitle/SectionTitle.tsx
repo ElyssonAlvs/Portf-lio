@@ -5,8 +5,11 @@ interface SectionTitleProps {
 
 export const SectionTitle = ({ title, className = "" }: SectionTitleProps) => {
   return (
-    <h2 className={`text-2xl sm:text-3xl font-extrabold tracking-tight mb-6 text-foreground ${className}`}>
-      {title}
-    </h2>
+    <div className={`flex items-center gap-3 mb-6 ${className}`}>
+      <h2 className="text-xs uppercase font-mono tracking-wider text-[var(--text-muted)] font-semibold">
+        {title}
+      </h2>
+      <div className="flex-grow h-px bg-[var(--border)]" />
+    </div>
   );
 };

@@ -5,7 +5,9 @@
     <script>
       (function() {
         try {
-          var t = localStorage.getItem('theme');
+          // Limpa a chave legada que ficou gravada como 'light' no navegador do usuário
+          localStorage.removeItem('theme');
+          var t = localStorage.getItem('portfolio_theme');
           if (t === 'light') {
             document.documentElement.classList.remove('dark');
             document.documentElement.setAttribute('data-theme', 'light');
@@ -22,7 +24,26 @@
     <link rel="icon" type="image/svg+xml" href="/robot.svg?v=3" />
     <link rel="shortcut icon" type="image/svg+xml" href="/robot.svg?v=3" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elysson Alves | Engenheiro de IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>Elysson Alves | Engenheiro de Software · Backend & IA</title>
+    <meta name="description" content="Bacharel em Sistemas de Informação pela UFC e Desenvolvedor Backend na SpeedMed. Especialista em APIs REST escaláveis, microsserviços, Docker, PostgreSQL e Agentes Autônomos de IA (LangGraph, MCP, RAG)." />
+    <meta name="keywords" content="Desenvolvedor Backend, Engenheiro de IA, Python, FastAPI, TypeScript, NestJS, LangGraph, MCP, PostgreSQL, Docker, Redis, Elysson Alves" />
+    <meta name="author" content="Elysson Alves" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://elyssonalvs.github.io/Portf-lio/" />
+    <meta property="og:title" content="Elysson Alves | Engenheiro de Software · Backend & IA" />
+    <meta property="og:description" content="Bacharel em Sistemas de Informação pela UFC e Desenvolvedor Backend na SpeedMed. Especialista em APIs REST escaláveis, microsserviços, Docker, PostgreSQL e Agentes Autônomos de IA (LangGraph, MCP, RAG)." />
+    <meta property="og:image" content="https://elyssonalvs.github.io/Portf-lio/assets/og-preview.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Elysson Alves | Engenheiro de Software · Backend & IA" />
+    <meta name="twitter:description" content="Bacharel em Sistemas de Informação pela UFC e Desenvolvedor Backend na SpeedMed. Especialista em APIs REST escaláveis, microsserviços, Docker, PostgreSQL e Agentes Autônomos de IA (LangGraph, MCP, RAG)." />
+    <meta name="twitter:image" content="https://elyssonalvs.github.io/Portf-lio/assets/og-preview.png" />
   </head>
   <body>
     <div id="root"></div>

@@ -3,30 +3,30 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
+  height: 56px;
   display: flex;
   align-items: center;
   z-index: 100;
-  background-color: rgba(248, 250, 252, 0.88);
+  background-color: rgba(248, 250, 252, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  transition: var(--transition-smooth);
+  transition: height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 :global([data-theme="dark"]) .header {
-  background-color: rgba(9, 11, 16, 0.85);
+  background-color: rgba(10, 14, 23, 0.92);
 }
 
 .header.scrolled {
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-  height: 70px;
+  height: 52px;
+  border-bottom: 1px solid var(--border-strong);
 }
 
 .container {
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(1rem, 2.5vw, 2rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,9 +35,10 @@
 .logo {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   color: var(--text-primary);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .logo span {
@@ -47,35 +48,47 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 4px;
 }
 
 .navLink {
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 0.875rem;
-  padding: 8px 16px;
-  border-radius: 8px;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 4px;
   background: none;
-  border: 1px solid transparent;
+  border: none;
   cursor: pointer;
   font-weight: 500;
-  transition: var(--transition-smooth);
+  transition: color 0.15s ease;
 }
 
 .navLink:hover {
   color: var(--text-primary);
-  background-color: rgba(0, 0, 0, 0.03);
+  background: none;
 }
 
 :global([data-theme="dark"]) .navLink:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background: none;
 }
 
 .navLink.active {
-  color: var(--accent);
-  background-color: var(--tag-bg);
-  border-color: var(--tag-border);
+  color: var(--text-primary);
+  font-weight: 700;
+  background: none;
+  border: none;
+  position: relative;
+}
+
+.navLink.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background-color: var(--accent);
 }
 
 .navLink:focus-visible, .actionBtn:focus-visible {
@@ -90,37 +103,36 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .actionBtn {
-  min-width: 40px;
-  height: 40px;
-  padding: 0 10px;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--border);
   background-color: var(--surface);
   color: var(--text-primary);
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-  font-size: 0.95rem;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  font-size: 12px;
 }
 
 .actionBtn:hover {
   border-color: var(--accent);
   color: var(--accent);
-  transform: translateY(-1px);
 }
 
 .menuBtn {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 24px;
-  height: 18px;
+  width: 20px;
+  height: 16px;
   background: none;
   border: none;
   cursor: pointer;
@@ -140,18 +152,13 @@
 @media (max-width: 900px) {
   .menuBtn {
     display: flex;
-  }
-
-  .menuBtn.open span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-  
-  .menuBtn.open span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .menuBtn.open span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--surface);
   }
 
   .nav {
@@ -159,17 +166,17 @@
     top: 0;
     right: -100%;
     width: 80%;
-    max-width: 300px;
+    max-width: 280px;
     height: 100vh;
     background-color: var(--surface);
     border-left: 1px solid var(--border);
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
-    padding: 40px;
+    gap: 16px;
+    padding: 32px;
     z-index: 99;
     transition: var(--transition-smooth);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+    box-shadow: none;
   }
 
   .nav.open {
@@ -177,9 +184,9 @@
   }
 
   .navLink {
-    font-size: 1.1rem;
+    font-size: 14px;
     width: 100%;
-    text-align: center;
-    padding: 12px;
+    text-align: left;
+    padding: 8px 12px;
   }
 }

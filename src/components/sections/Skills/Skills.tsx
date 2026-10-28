@@ -1,11 +1,8 @@
-import { motion } from 'framer-motion';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { translations } from '../../../i18n/translations';
 import { skillCategories } from '../../../data/skills';
 import { AnimatedSection } from '../../ui/AnimatedSection/AnimatedSection';
 import { SectionTitle } from '../../ui/SectionTitle/SectionTitle';
-import { Tag } from '../../ui/Tag/Tag';
-import { Card, CardHeader, CardTitle, CardContent } from '../../ui/card';
 import styles from './Skills.module.css';
 
 export const Skills = () => {
@@ -13,35 +10,26 @@ export const Skills = () => {
   const t = translations[language].skills;
 
   return (
-    <AnimatedSection id="skills">
+    <AnimatedSection id="skills" className="w-full">
       <SectionTitle title={t.title} />
-      
-      <div className={styles.grid}>
-        {skillCategories.map((category, index) => (
-          <motion.div 
-            key={index}
-            className={styles.categoryCard}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Card className="h-full">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg text-primary/80">{category.category[language]}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {category.items.map(item => {
-                    const label = typeof item === 'string' ? item : item[language];
-                    return <Tag key={label} label={label} />;
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
+
+      <div className={styles.matrix}>
+        {skillCategories.map((category, index) => {
+          const itemsString = category.items
+            .map((item) => (typeof item === 'string' ? item : item[language]))
+            .join(' · ');
+
+          return (
+            <div key={index} className={styles.row}>
+              <div className={styles.categoryTitle}>
+                {category.category[language]}
+              </div>
+              <div className={styles.skillsText}>
+                {itemsString}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </AnimatedSection>
   );

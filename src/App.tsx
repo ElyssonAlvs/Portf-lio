@@ -1,26 +1,92 @@
 import { useState, useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useLanguage } from './contexts/LanguageContext'
 import { Header } from './components/layout/Header/Header'
 import { Footer } from './components/layout/Footer/Footer'
 import { Hero } from './components/sections/Hero/Hero'
+import { Projects } from './components/sections/Projects/Projects'
 import { Experience } from './components/sections/Experience/Experience'
 import { Skills } from './components/sections/Skills/Skills'
-import { Projects } from './components/sections/Projects/Projects'
 import { Publications } from './components/sections/Publications/Publications'
 import { Contact } from './components/sections/Contact/Contact'
+import { ProjectDetail } from './pages/ProjectDetail/ProjectDetail'
+
+interface HomeProps {
+  setActiveTab: (tab: string) => void
+}
+
+function HomePage({ setActiveTab }: HomeProps) {
+  useEffect(() => {
+    const sectionIds = [
+      { id: 'hero', tab: 'home' },
+      { id: 'projects', tab: 'projects' },
+      { id: 'experience', tab: 'experience' },
+      { id: 'skills', tab: 'skills' },
+      { id: 'publications', tab: 'publications' },
+      { id: 'contact', tab: 'contact' }
+    ]
+
+    const handleScroll = () => {
+      if (window.scrollY < 120) {
+        setActiveTab('home')
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const found = sectionIds.find((s) => s.id === entry.target.id)
+            if (found) {
+              setActiveTab(found.tab)
+            }
+          }
+        })
+      },
+      {
+        rootMargin: '-25% 0px -45% 0px',
+        threshold: 0.1
+      }
+    )
+
+    sectionIds.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      observer.disconnect()
+    }
+  }, [setActiveTab])
+
+  return (
+    <div className="space-y-12 md:space-y-14">
+      <Hero setActiveTab={setActiveTab} />
+      <Projects />
+      <Experience />
+      <Skills />
+      <Publications />
+      <Contact />
+    </div>
+  )
+}
 
 function App() {
   const { language } = useLanguage()
   const [activeTab, setActiveTab] = useState('home')
+  const location = useLocation()
 
   useEffect(() => {
     // Update HTML lang attribute
     document.documentElement.lang = language
 
-    document.title = language === 'pt'
-      ? 'Elysson Alves | Engenheiro de IA'
-      : 'Elysson Alves | AI Engineer'
+    if (location.pathname === '/') {
+      document.title = language === 'pt'
+        ? 'Elysson Alves | Engenheiro de Software · Backend & IA'
+        : 'Elysson Alves | Software Engineer · Backend & AI'
+    }
 
     // Update meta description
     let metaDesc = document.querySelector('meta[name="description"]')
@@ -32,8 +98,8 @@ function App() {
     metaDesc.setAttribute(
       'content',
       language === 'pt'
-        ? 'Portfólio de Elysson Alves, estudante de Sistemas de Informação na UFC, Desenvolvedor Backend na SpeedMed e Full Stack no NPI. Especialista em IA, Automação e Sistemas Multiagentes.'
-        : 'Portfolio of Elysson Alves, Information Systems student at UFC, Backend Developer at SpeedMed and Full Stack at NPI. Specialist in AI, Automation, and Multi-Agent Systems.'
+        ? 'Bacharel em Sistemas de Informação pela UFC e Desenvolvedor Backend na SpeedMed. Especialista em APIs REST escaláveis, microsserviços, Docker, PostgreSQL e Agentes Autônomos de IA (LangGraph, MCP, RAG).'
+        : 'Bachelor of Information Systems from UFC and Backend Developer at SpeedMed. Specialist in scalable REST APIs, microservices, Docker, PostgreSQL, and Autonomous AI Agents (LangGraph, MCP, RAG).'
     )
 
     // Update meta keywords
@@ -46,37 +112,21 @@ function App() {
     metaKeywords.setAttribute(
       'content',
       language === 'pt'
-        ? 'desenvolvedor backend, desenvolvedor full stack, engenheiro de ia, sistemas multiagentes, inteligência artificial, react, python, nestjs, ufc, automação'
-        : 'backend developer, full stack developer, ai engineer, multi-agent systems, artificial intelligence, react, python, nestjs, ufc, automation'
+        ? 'Desenvolvedor Backend, Engenheiro de IA, Python, FastAPI, TypeScript, NestJS, LangGraph, MCP, PostgreSQL, Docker, Redis, Elysson Alves'
+        : 'Backend Developer, AI Engineer, Python, FastAPI, TypeScript, NestJS, LangGraph, MCP, PostgreSQL, Docker, Redis, Elysson Alves'
     )
-  }, [language])
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior })
-  }, [activeTab])
+  }, [language, location.pathname])
 
   return (
-    <div style={{ paddingTop: '80px', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ paddingTop: '56px', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="container flex-grow py-4 md:py-6" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            style={{ width: '100%' }}
-          >
-            {activeTab === 'home' && <Hero setActiveTab={setActiveTab} />}
-            {activeTab === 'experience' && <Experience />}
-            {activeTab === 'skills' && <Skills />}
-            {activeTab === 'projects' && <Projects />}
-            {activeTab === 'publications' && <Publications />}
-            {activeTab === 'contact' && <Contact />}
-          </motion.div>
-        </AnimatePresence>
+      <main className="container flex-grow py-6 md:py-10">
+        <Routes>
+          <Route path="/" element={<HomePage setActiveTab={setActiveTab} />} />
+          <Route path="/project/:projectId" element={<ProjectDetail />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       <Footer />

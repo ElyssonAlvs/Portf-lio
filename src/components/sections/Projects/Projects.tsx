@@ -1,35 +1,23 @@
-import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { translations } from '../../../i18n/translations';
 import { projects } from '../../../data/projects';
 import { AnimatedSection } from '../../ui/AnimatedSection/AnimatedSection';
 import { SectionTitle } from '../../ui/SectionTitle/SectionTitle';
-import { Tag } from '../../ui/Tag/Tag';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../../ui/card';
 import styles from './Projects.module.css';
 
-const getImageUrl = (imagePath?: string) => {
-  if (!imagePath) return undefined;
-  if (imagePath.startsWith('http')) return imagePath;
-  return `${import.meta.env.BASE_URL}${imagePath.replace(/^\//, '')}`;
-};
+const ExternalIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" y1="14" x2="21" y2="3" />
+  </svg>
+);
 
-const ExternalIcon = ({ className = "" }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="20" 
-    height="20" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-    <polyline points="15 3 21 3 21 9"></polyline>
-    <line x1="10" y1="14" x2="21" y2="3"></line>
+const ArrowRightIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
   </svg>
 );
 
@@ -38,54 +26,74 @@ export const Projects = () => {
   const t = translations[language].projects;
 
   return (
-    <AnimatedSection id="projects">
+    <AnimatedSection id="projects" className="w-full">
       <SectionTitle title={t.title} />
-      
-      <div className={styles.grid}>
-        {projects.map((project, index) => (
-          <motion.a 
-            key={index}
-            href={project.url}
-            target="_blank"
-            rel="noreferrer"
-            className="block h-full group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -8, transition: { duration: 0.2 } }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Card className="h-full flex flex-col group-hover:border-primary transition-colors duration-300 overflow-hidden relative">
-              {project.image && (
-                <div className="h-48 md:h-56 w-full bg-muted overflow-hidden relative border-b border-border">
-                   <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent z-10 pointer-events-none" />
-                   <img src={getImageUrl(project.image)} alt={project.name} className="w-full h-full object-cover group-hover:opacity-95 transition-opacity duration-300" />
+
+      <div className={styles.list}>
+        {projects.map((project) => {
+          const category = project.category[language];
+          const primaryMetric = project.metrics[0];
+          const stackString = project.tags
+            .map((tag) => (typeof tag === 'string' ? tag : tag[language]))
+            .join(' · ');
+
+          return (
+            <article key={project.id} className={styles.item}>
+              {/* Linha Superior: Nome + Categoria à esquerda | Métrica à direita */}
+              <div className={styles.itemHeader}>
+                <div className={styles.itemTitleGroup}>
+                  <h3 className={styles.projectName}>
+                    {project.name}
+                  </h3>
+                  <span className={styles.categoryBadge}>
+                    {category}
+                  </span>
                 </div>
-              )}
-              <CardHeader className={project.image ? "pt-5 pb-2" : "pt-6 pb-2"}>
-                <div className="flex items-start justify-between gap-4">
-                  <CardTitle className="text-2xl font-bold leading-snug">{project.name}</CardTitle>
-                  <div className="text-muted-foreground shrink-0 group-hover:text-primary transition-colors mt-1">
-                    <ExternalIcon />
+
+                {primaryMetric && (
+                  <div className={styles.metricGroup} title={primaryMetric.label[language]}>
+                    <span className={styles.metricLabel}>{primaryMetric.label[language]}:</span>
+                    <span className={styles.metricValue}>{primaryMetric.value}</span>
                   </div>
+                )}
+              </div>
+
+              {/* Linha do Meio: Descrição Factual e Concisa */}
+              <p className={styles.itemDesc}>
+                {project.description[language]}
+              </p>
+
+              {/* Linha Inferior: Stack com · à esquerda | Ações à direita */}
+              <div className={styles.itemFooter}>
+                <div className={styles.techStack}>
+                  {stackString}
                 </div>
-              </CardHeader>
-              <CardContent className="flex-grow pb-4">
-                <CardDescription className="text-base text-muted-foreground leading-relaxed">
-                  {project.description[language]}
-                </CardDescription>
-              </CardContent>
-              <CardFooter className="pt-2">
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => {
-                    const label = typeof tag === 'string' ? tag : tag[language];
-                    return <Tag key={label} label={label} />;
-                  })}
+
+                <div className={styles.actions}>
+                  <Link
+                    to={`/project/${project.id}`}
+                    className={styles.archLink}
+                    aria-label={`${t.view_architecture}: ${project.name}`}
+                  >
+                    <span>{t.view_architecture}</span>
+                    <ArrowRightIcon />
+                  </Link>
+
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.githubLink}
+                    aria-label={`GitHub ${project.name}`}
+                  >
+                    <span>{t.github_repo}</span>
+                    <ExternalIcon />
+                  </a>
                 </div>
-              </CardFooter>
-            </Card>
-          </motion.a>
-        ))}
+              </div>
+            </article>
+          );
+        })}
       </div>
     </AnimatedSection>
   );

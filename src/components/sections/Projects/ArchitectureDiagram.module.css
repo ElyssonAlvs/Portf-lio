@@ -1,0 +1,189 @@
+/* ArchitectureDiagram.module.css
+   GPU-accelerated stream animations and tactile micro-interactions for the architecture topology
+*/
+
+.nodeCard {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.nodeCard:hover {
+  transform: translateY(-2px);
+}
+
+.nodeSelected {
+  box-shadow: 0 4px 20px -2px var(--accent-glow);
+}
+
+.nodeDefenseSelected {
+  box-shadow: 0 4px 20px -2px rgba(248, 113, 113, 0.22);
+}
+
+/* Active Node Status Indicator Ring */
+.activeIndicatorContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+}
+
+.activeIndicatorRing {
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--accent);
+  animation: pulsePresenceRing 2.2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes pulsePresenceRing {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+}
+
+/* Data Stream Connectors */
+.connectorDesktop {
+  position: relative;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .connectorDesktop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}
+
+.connectorMobile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 28px;
+  margin: 2px 0;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .connectorMobile {
+    display: none;
+  }
+}
+
+/* Stream Particles (Sapphire Cyan default) */
+.streamDotHorizontal {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin-top: -2.5px;
+  border-radius: 9999px;
+  background-color: var(--accent);
+  box-shadow: 0 0 6px 1px var(--accent);
+  animation: streamFlowHorizontal 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+@keyframes streamFlowHorizontal {
+  0% {
+    transform: translateX(0px) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(4px) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(20px) scale(1);
+  }
+  100% {
+    transform: translateX(24px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.streamDotVertical {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 9999px;
+  background-color: var(--accent);
+  box-shadow: 0 0 6px 1px var(--accent);
+  animation: streamFlowVertical 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+@keyframes streamFlowVertical {
+  0% {
+    transform: translateY(0px) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(4px) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(16px) scale(1);
+  }
+  100% {
+    transform: translateY(20px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Defense State Variants (Amber/Red) */
+.defenseStreamDot {
+  background-color: var(--state-guardrail);
+  box-shadow: 0 0 7px 1.5px var(--state-guardrail);
+}
+
+.defenseStreamLine {
+  stroke: var(--state-guardrail) !important;
+  opacity: 0.7;
+}
+
+/* Reduced Motion Accessibility Guard */
+@media (prefers-reduced-motion: reduce) {
+  .nodeCard {
+    transition: none;
+  }
+
+  .nodeCard:hover {
+    transform: none;
+  }
+
+  .streamDotHorizontal,
+  .streamDotVertical,
+  .activeIndicatorRing {
+    animation: none;
+    display: none;
+  }
+}
