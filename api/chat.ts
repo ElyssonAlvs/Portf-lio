@@ -1,4 +1,6 @@
-import knowledgeData from '../src/data/knowledge.json' with { type: 'json' };
+import knowledgeData from '../src/data/knowledge.json';
+
+declare const process: { env: Record<string, string | undefined> };
 
 export const config = {
   runtime: 'edge',
