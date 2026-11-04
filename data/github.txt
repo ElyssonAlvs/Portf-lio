@@ -1,0 +1,13 @@
+https://github.com/ElyssonAlvs -> Github Principal
+https://github.com/ElyssonAlvs/FinanceBOT
+    Desc: Uma automação via n8n localhost usando Groq API, RAG e API do Telegram para registro financeiro
+https://github.com/ElyssonAlvs/TaskAgent
+    Desc: A lightweight AI agent that integrates with a FastAPI Task Manager API, enabling CRUD operation using natural language via LLM-powered interactions.
+https://github.com/ElyssonAlvs/fastapi-task-manager
+    Desc: A simple Task Manager API built with FastAPI, featuring CRUD operations, filtering, and pagination.
+https://github.com/ElyssonAlvs/Mineracao_de_Dados
+    Desc: Repositório destinado para os conteúdos e práticas da cadeira de Mineração de Dados, com foco na linguagem Python e suas bibliotecas na área de dados.
+https://github.com/ElyssonAlvs/dslist
+    Desc: Repositório destinado a criação de uma API em Java Spring.
+https://github.com/ElyssonAlvs/Stock_FASTAPI
+    Desc: A simple manager stock making with FASTAPI.

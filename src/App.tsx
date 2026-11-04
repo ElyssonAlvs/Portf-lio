@@ -10,6 +10,7 @@ import { Skills } from './components/sections/Skills/Skills'
 import { Publications } from './components/sections/Publications/Publications'
 import { Contact } from './components/sections/Contact/Contact'
 import { ProjectDetail } from './pages/ProjectDetail/ProjectDetail'
+import { ChatWidget } from './components/chat/ChatWidget'
 
 interface HomeProps {
   setActiveTab: (tab: string) => void
@@ -130,6 +131,9 @@ function App() {
       </main>
 
       <Footer />
+
+      {/* Assistente Profissional Factual com IA */}
+      <ChatWidget />
     </div>
   )
 }

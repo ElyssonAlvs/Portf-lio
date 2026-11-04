@@ -88,6 +88,27 @@ export const translations = {
     },
     footer: {
       all_rights: "Todos os direitos reservados."
+    },
+    chat: {
+      button_aria_open: "Abrir assistente profissional",
+      button_aria_close: "Fechar assistente profissional",
+      widget_title: "Assistente Profissional",
+      widget_subtitle: "Elysson Alves · IA Factual",
+      status_online: "Online",
+      status_streaming: "Gerando resposta...",
+      welcome_message: "Olá! Sou o assistente factual de Elysson Alves. Posso responder sobre stacks (FastAPI, NestJS, LangGraph), experiência na SpeedMed e UFC, projetos em produção e artigos científicos.",
+      input_placeholder: "Pergunte sobre stacks, projetos, carreira...",
+      send_aria: "Enviar mensagem",
+      stop_aria: "Interromper resposta",
+      clear_aria: "Reiniciar conversa",
+      disclaimer: "Respostas baseadas estritamente em dados verificados.",
+      retry: "Tentar novamente",
+      quick_questions: [
+        "Quais suas principais stacks backend?",
+        "Fale sobre sua experiência na SpeedMed",
+        "Como funcionam seus projetos com Agentes de IA?",
+        "Como entrar em contato com Elysson?"
+      ]
     }
   },
   en: {
@@ -179,6 +200,27 @@ export const translations = {
     },
     footer: {
       all_rights: "All rights reserved."
+    },
+    chat: {
+      button_aria_open: "Open professional assistant",
+      button_aria_close: "Close professional assistant",
+      widget_title: "Professional Assistant",
+      widget_subtitle: "Elysson Alves · Factual AI",
+      status_online: "Online",
+      status_streaming: "Generating response...",
+      welcome_message: "Hello! I am Elysson Alves' factual assistant. I can answer questions about backend engineering (FastAPI, NestJS, LangGraph), experience at SpeedMed & UFC, production projects, and publications.",
+      input_placeholder: "Ask about stacks, projects, career...",
+      send_aria: "Send message",
+      stop_aria: "Stop generating",
+      clear_aria: "Reset conversation",
+      disclaimer: "Answers generated strictly from verified public data.",
+      retry: "Try again",
+      quick_questions: [
+        "What are your core backend stacks?",
+        "Tell me about your experience at SpeedMed",
+        "How do your AI Agent projects work?",
+        "How can I get in touch with Elysson?"
+      ]
     }
   }
 };

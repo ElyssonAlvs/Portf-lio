@@ -1,0 +1,802 @@
+{
+  "profile": {
+    "name": "Elysson Alves de Lacerda",
+    "preferredName": "Elysson Alves",
+    "headline": "Desenvolvedor Backend & Engenharia de IA",
+    "location": "Quixadá, Ceará, Brasil",
+    "email": "elyssontech@gmail.com",
+    "github": "https://github.com/ElyssonAlvs",
+    "linkedin": "https://www.linkedin.com/in/elysson-alves",
+    "bio": {
+      "pt": "Graduando em Sistemas de Informação pela Universidade Federal do Ceará (UFC). Experiência em desenvolvimento backend (NestJS, FastAPI, Node.js), modelagem de dados, arquiteturas orientadas a agentes de IA (LangGraph, MCP, BDI) e metodologias ágeis Scrum.",
+      "en": "Information Systems undergraduate at Universidade Federal do Ceará (UFC). Experience in backend development (NestJS, FastAPI, Node.js), relational data modeling, AI agentic architectures (LangGraph, MCP, BDI), and agile Scrum methodologies."
+    },
+    "education": [
+      {
+        "degree": {
+          "pt": "Bacharelado em Sistemas de Informação",
+          "en": "Bachelor of Information Systems"
+        },
+        "institution": "Universidade Federal do Ceará (UFC)",
+        "period": {
+          "pt": "Mar 2022 – Ago 2026",
+          "en": "Mar 2022 – Aug 2026"
+        },
+        "description": {
+          "pt": "Formação focada em engenharia de software, banco de dados, governança de TI, metodologias ágeis e inteligência artificial.",
+          "en": "Education focused on software engineering, databases, IT governance, agile methodologies, and artificial intelligence."
+        }
+      }
+    ],
+    "certifications": [
+      "AWS Academy Graduate - AWS Academy Cloud Foundations",
+      "Lean Six Sigma White Belt",
+      "Linguagem de Programação Python - Básico",
+      "Curso IA na Prática",
+      "Ciência de Dados para Iniciantes"
+    ],
+    "awards": [
+      "1º Lugar como Melhor Trabalho (Best Paper - Melhor Resumo) na XV edição dos Encontros Universitários da UFC (2025)",
+      "Top 3 Melhores Trabalhos de Graduação no WESAAC 2025 (Workshop-Escola de Sistemas de Agentes, SBBD & BRACIS 2025)"
+    ],
+    "languages": [
+      {
+        "language": "Português",
+        "level": "Nativo"
+      },
+      {
+        "language": "Inglês",
+        "level": "Intermediário / Técnico"
+      },
+      {
+        "language": "Italiano",
+        "level": "Básico"
+      },
+      {
+        "language": "Russo",
+        "level": "Básico"
+      }
+    ],
+    "thesis": {
+      "title": "Mapeamento de Processos e BPM no Contexto do Desenvolvimento de Software: um Mapeamento Sistemático da Literatura em Organizações de Desenvolvimento de Software",
+      "institution": "Universidade Federal do Ceará (UFC)",
+      "focus": "Business Process Management (BPM) aplicado à engenharia de software",
+      "url": "https://repositorio.ufc.br/handle/riufc/85781"
+    }
+  },
+  "skills": [
+    {
+      "category": {
+        "pt": "Backend & APIs",
+        "en": "Backend & APIs"
+      },
+      "items": [
+        "TypeScript",
+        "Node.js",
+        "NestJS",
+        "Python",
+        "FastAPI",
+        "Java (Spring Boot)",
+        {
+          "pt": "APIs RESTful",
+          "en": "RESTful APIs"
+        },
+        "Webhooks",
+        {
+          "pt": "Contratos OpenAPI",
+          "en": "OpenAPI Contracts"
+        },
+        "Clean Code"
+      ]
+    },
+    {
+      "category": {
+        "pt": "Bancos de Dados & Infraestrutura",
+        "en": "Databases & Infrastructure"
+      },
+      "items": [
+        "PostgreSQL",
+        "MySQL",
+        "Prisma ORM",
+        {
+          "pt": "Redis (Caching & Filas)",
+          "en": "Redis (Caching & Queues)"
+        },
+        "Docker",
+        "Docker Compose",
+        "Linux",
+        "Git / GitHub Flow"
+      ]
+    },
+    {
+      "category": {
+        "pt": "Engenharia de IA & Agentes",
+        "en": "AI Engineering & Agents"
+      },
+      "items": [
+        "LangGraph",
+        "Model Context Protocol (MCP)",
+        {
+          "pt": "Agentes Autônomos (BDI, CrewAI)",
+          "en": "Autonomous Agents (BDI, CrewAI)"
+        },
+        "RAG (ChromaDB, LangChain)",
+        "Prompt Engineering",
+        "LLMs (OpenAI, Claude, Groq, Ollama)"
+      ]
+    },
+    {
+      "category": {
+        "pt": "Testes & Metodologias",
+        "en": "Testing & Methodologies"
+      },
+      "items": [
+        {
+          "pt": "Testes Unitários & E2E (Jest, Pytest)",
+          "en": "Unit & E2E Testing (Jest, Pytest)"
+        },
+        "Feature Flags (Unleash)",
+        "Scrum",
+        {
+          "pt": "Modelagem BPM",
+          "en": "BPM Modeling"
+        },
+        "LGPD"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": {
+        "pt": "Desenvolvedor Backend",
+        "en": "Backend Developer"
+      },
+      "company": "SpeedMed",
+      "period": {
+        "pt": "Maio 2026 – Presente",
+        "en": "May 2026 – Present"
+      },
+      "description": {
+        "pt": "Desenvolvimento e sustentação do backend da plataforma SpeedMed (SaaS para gestão de clínicas e consultórios médicos). Concepção de APIs REST escaláveis com NestJS, modelagem e otimização relacional com PostgreSQL e Prisma ORM. Implementação de autenticação JWT, validação de esquemas com Zod, testes automatizados e arquitetura monorepo com Turborepo e Docker. Gestão de deploy contínuo com Feature Flags via Unleash.",
+        "en": "Backend development and maintenance for the SpeedMed platform (SaaS for healthcare and clinic management). Building scalable REST APIs with NestJS, relational data modeling and optimization with PostgreSQL and Prisma ORM. Implementing JWT authentication, Zod schema validation, automated test suites, and monorepo architecture using Turborepo and Docker. Continuous feature management using Feature Flags via Unleash."
+      },
+      "tags": [
+        "NestJS",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma ORM",
+        "Docker",
+        "Turborepo",
+        "Unleash",
+        "Zod",
+        "JWT"
+      ]
+    },
+    {
+      "role": {
+        "pt": "Desenvolvedor de Software (Full Stack / Backend)",
+        "en": "Software Developer (Full Stack / Backend)"
+      },
+      "company": "Universidade Federal do Ceará (UFC)",
+      "period": {
+        "pt": "Set 2025 – Jul 2026",
+        "en": "Sep 2025 – Jul 2026"
+      },
+      "description": {
+        "pt": "Desenvolvimento do sistema de prontuário eletrônico odontológico e plataforma de gestão do Plano de Desenvolvimento Institucional (PDI). Modelagem de banco de dados, construção de microsserviços e endpoints REST, integração com interfaces React e aplicação de cerimônias ágeis Scrum com validação direta de stakeholders.",
+        "en": "Development of the electronic dental records system and institutional development management platform (PDI). Relational database modeling, REST endpoint development, frontend integration with React, and active participation in Scrum agile ceremonies with direct stakeholder validation."
+      },
+      "tags": [
+        "Backend",
+        "PostgreSQL",
+        "React",
+        "TypeScript",
+        "APIs REST",
+        "Scrum"
+      ]
+    },
+    {
+      "role": {
+        "pt": "Gerente de Projetos, Finanças & Bolsista",
+        "en": "Project & Finance Manager, Scholar"
+      },
+      "company": "PET-SI UFC Quixadá",
+      "period": {
+        "pt": "Mar 2024 – Ago 2026",
+        "en": "Mar 2024 – Aug 2026"
+      },
+      "description": {
+        "pt": "Atuação multifuncional no Programa de Educação Tutorial em Sistemas de Informação. Coordenação ágil de equipes em projetos de pesquisa e extensão, controle orçamentário e fluxo financeiro semestral, além de liderança em publicações científicas premiadas na área de sistemas multiagentes e engenharia de software.",
+        "en": "Multifunctional leadership in the Tutorial Education Program (Information Systems). Agile project management across research and extension initiatives, semiannual budget planning and cash flow control, and authoring award-winning academic papers in multi-agent systems and software engineering."
+      },
+      "tags": [
+        {
+          "pt": "Gestão Ágil",
+          "en": "Agile Management"
+        },
+        {
+          "pt": "Finanças",
+          "en": "Finance"
+        },
+        {
+          "pt": "Pesquisa & Extensão",
+          "en": "Research & Extension"
+        },
+        "Liderança",
+        "ClickUp"
+      ]
+    },
+    {
+      "role": {
+        "pt": "Conselheiro de Governança",
+        "en": "Governance Board Member"
+      },
+      "company": "Avante Tech Jr.",
+      "period": {
+        "pt": "Jan 2025 – Dez 2025",
+        "en": "Jan 2025 – Dec 2025"
+      },
+      "description": {
+        "pt": "Atuação no Conselho Estratégico da empresa júnior de tecnologia. Avaliação de conformidade estatutária, compliance, emissão de pareceres de governança, análise de riscos corporativos e mentoria estratégica às diretorias operacionais.",
+        "en": "Board member at the collegiate corporate governance body of the student tech enterprise. Oversight of statutory compliance, issuing governance opinions, strategic risk assessment, and guiding organizational leadership."
+      },
+      "tags": [
+        {
+          "pt": "Governança Corporativa",
+          "en": "Corporate Governance"
+        },
+        "Compliance",
+        {
+          "pt": "Gestão de Riscos",
+          "en": "Risk Management"
+        },
+        {
+          "pt": "Estratégia",
+          "en": "Strategy"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "agentic-triage",
+      "name": "Agentic Triage Engine",
+      "category": {
+        "pt": "AI Agent & Triagem Clínica",
+        "en": "AI Agent & Clinical Triage"
+      },
+      "subtitle": {
+        "pt": "Triagem Clínica Autônoma, Roteamento Determinístico & FastMCP",
+        "en": "Autonomous Clinical Triage, Deterministic Routing & FastMCP"
+      },
+      "problem": {
+        "pt": "Alto custo de tokens e risco de alucinação em agendamentos médicos sem supervisão humana.",
+        "en": "Excessive token expenditure and hallucination risk in medical scheduling without human oversight."
+      },
+      "solution": {
+        "pt": "Zero-Cost Router com validações determinísticas SQL diretas, servidor FastMCP 3.4 isolado via stdio, LangGraph com checkpointing de estado e gate Human-in-the-Loop.",
+        "en": "Zero-Cost Router with deterministic direct SQL validation, isolated FastMCP 3.4 server via stdio, LangGraph state checkpointing, and Human-in-the-Loop gate."
+      },
+      "description": {
+        "pt": "Pattern de produção para triagem clínica automatizada com Agentes de IA. Resolve o custo de tokens com Text-to-SQL em PostgreSQL ACID (<2ms e 0 tokens), orquestração cíclica no LangGraph, ferramentas isoladas via FastMCP (stdio) e governança com Human-in-the-Loop para casos graves.",
+        "en": "Production pattern for automated clinical triage with AI Agents. Solves token costs with Text-to-SQL on ACID PostgreSQL (<2ms and 0 tokens), cyclic LangGraph orchestration, isolated tools via FastMCP (stdio), and Human-in-the-Loop governance for severe cases."
+      },
+      "metrics": [
+        {
+          "label": {
+            "pt": "Validação Determinística SQL",
+            "en": "Deterministic SQL Validation"
+          },
+          "value": "0 tokens / <2ms"
+        },
+        {
+          "label": {
+            "pt": "Latência de Inferência LPU",
+            "en": "LPU Inference Latency"
+          },
+          "value": "Groq ~150ms"
+        },
+        {
+          "label": {
+            "pt": "Protocolo de Ferramentas",
+            "en": "Tool Protocol"
+          },
+          "value": "FastMCP (stdio)"
+        }
+      ],
+      "tags": [
+        "FastMCP",
+        "LangGraph",
+        "PostgreSQL",
+        "Docker",
+        "Groq",
+        "Python"
+      ],
+      "adr": {
+        "decision": {
+          "pt": "FastMCP isolado via stdio",
+          "en": "FastMCP isolated via stdio"
+        },
+        "discarded": {
+          "pt": "Function calling acoplado diretamente ao prompt do LLM",
+          "en": "Function calling coupled directly into LLM prompt"
+        },
+        "rationale": {
+          "pt": "Desacopla ferramentas do modelo, reduz risco de prompt injection e isola o acesso a banco.",
+          "en": "Decouples tools from model runtime, mitigates prompt injection vectors, and strictly isolates DB access."
+        }
+      },
+      "url": "https://github.com/ElyssonAlvs/agentic-triage"
+    },
+    {
+      "id": "finance-bot",
+      "name": "FinanceBOT",
+      "category": {
+        "pt": "Assistente Financeiro com RAG",
+        "en": "Financial AI Assistant & RAG"
+      },
+      "subtitle": {
+        "pt": "Assistente Financeiro com RAG Híbrido & n8n",
+        "en": "Financial Assistant with Hybrid RAG & n8n"
+      },
+      "problem": {
+        "pt": "Fricção em planilhas e imprecisão de cálculos numéricos em busca vetorial pura.",
+        "en": "Friction in spreadsheets and numeric inaccuracy in pure vector searches."
+      },
+      "solution": {
+        "pt": "Persistência Híbrida combinando Analytics Exato em Python para somas e ChromaDB para busca semântica, orquestrados via n8n.",
+        "en": "Hybrid Persistence combining exact Python Analytics for arithmetic and ChromaDB for semantic search, orchestrated via n8n."
+      },
+      "description": {
+        "pt": "Assistente financeiro no Telegram para controle de gastos e conciliação bancária. Integra LLMs de alta velocidade (Llama 3.3 70B via Groq) a banco vetorial ChromaDB com RAG híbrido (embeddings e buscas em CSV) e automação de eventos no n8n.",
+        "en": "Financial assistant on Telegram for expense tracking and bank reconciliation. Integrates high-speed LLMs (Llama 3.3 70B via Groq) with ChromaDB vector store using Hybrid RAG (embeddings and CSV search) and event automation in n8n."
+      },
+      "metrics": [
+        {
+          "label": {
+            "pt": "Estratégia de Busca RAG",
+            "en": "RAG Search Strategy"
+          },
+          "value": "Híbrida (CSV + ChromaDB)"
+        },
+        {
+          "label": {
+            "pt": "Modelo de Linguagem",
+            "en": "Language Model"
+          },
+          "value": "Groq Llama 3.3 70B"
+        },
+        {
+          "label": {
+            "pt": "Automação de Eventos",
+            "en": "Event Automation"
+          },
+          "value": "n8n Webhook Switch"
+        }
+      ],
+      "tags": [
+        "Python",
+        "n8n",
+        "Groq",
+        "ChromaDB",
+        "Telegram",
+        "FastAPI"
+      ],
+      "adr": {
+        "decision": {
+          "pt": "Persistência Híbrida (CSV/Banco + ChromaDB)",
+          "en": "Hybrid Persistence (CSV/DB + ChromaDB)"
+        },
+        "discarded": {
+          "pt": "Vector Store puro para todas as consultas",
+          "en": "Pure Vector Store for all queries"
+        },
+        "rationale": {
+          "pt": "Modelos vetoriais alucinam em somas exatas de despesas; a matemática deve ser resolvida por código determinístico.",
+          "en": "Vector models hallucinate on exact arithmetic aggregations; math must be executed by deterministic code."
+        }
+      },
+      "url": "https://github.com/ElyssonAlvs/FinanceBOT"
+    },
+    {
+      "id": "task-agent",
+      "name": "TaskAgentV2",
+      "category": {
+        "pt": "Multiagente Dual-Engine",
+        "en": "Dual-Engine Multi-Agent"
+      },
+      "subtitle": {
+        "pt": "Orquestrador Assíncrono Dual-Engine (LangGraph & CrewAI)",
+        "en": "Asynchronous Dual-Engine Orchestrator (LangGraph & CrewAI)"
+      },
+      "problem": {
+        "pt": "Trade-off entre autonomia para linguagem ambígua vs. regras estritas sem improvisação.",
+        "en": "Trade-off between autonomy for ambiguous language vs. strict rules without improvisation."
+      },
+      "solution": {
+        "pt": "Arquitetura Dual-Engine desacoplada permitindo alternar entre CrewAI (criativo/colaborativo) e LangGraph (grafo estrito).",
+        "en": "Decoupled Dual-Engine architecture switching between CrewAI (collaborative) and LangGraph (strict graph)."
+      },
+      "description": {
+        "pt": "Motor assíncrono para orquestração de agentes autônomos baseado em grafos de decisão. Arquitetura Dual-Engine que integra LangGraph e CrewAI com validação estrita via Pydantic, queries no PostgreSQL e roteamento dinâmico entre modelos locais (Ollama) e nuvem.",
+        "en": "Asynchronous decision-graph engine for autonomous agent orchestration. Dual-Engine architecture integrating LangGraph and CrewAI with strict Pydantic validation, PostgreSQL queries, and dynamic routing between local (Ollama) and cloud models."
+      },
+      "metrics": [
+        {
+          "label": {
+            "pt": "Arquitetura de Motores",
+            "en": "Engine Architecture"
+          },
+          "value": "Dual-Engine (LangGraph + CrewAI)"
+        },
+        {
+          "label": {
+            "pt": "Validação & Tipagem",
+            "en": "Validation & Typing"
+          },
+          "value": "Pydantic v2 + PostgreSQL"
+        },
+        {
+          "label": {
+            "pt": "Roteamento de Modelos",
+            "en": "Model Routing"
+          },
+          "value": "Ollama Local + Nuvem"
+        }
+      ],
+      "tags": [
+        "Python",
+        "FastAPI",
+        "LangGraph",
+        "CrewAI",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "adr": {
+        "decision": {
+          "pt": "Dual-Engine Switchable (CrewAI + LangGraph)",
+          "en": "Switchable Dual-Engine (CrewAI + LangGraph)"
+        },
+        "discarded": {
+          "pt": "Agente único monolítico com prompt generalista",
+          "en": "Monolithic single agent with generalist prompt"
+        },
+        "rationale": {
+          "pt": "Permite alternar entre criatividade para entradas vagas e determinismo para operações críticas sem risco de desvios.",
+          "en": "Allows toggling between creative exploration for vague inputs and strict determinism for critical operations."
+        }
+      },
+      "url": "https://github.com/ElyssonAlvs/TaskAgentV2"
+    },
+    {
+      "id": "stock-fastapi",
+      "name": "Stock_FASTAPI",
+      "category": {
+        "pt": "API REST de Alta Concorrência",
+        "en": "High-Concurrency REST API"
+      },
+      "subtitle": {
+        "pt": "API RESTful de Alta Concorrência & Integridade ACID",
+        "en": "High-Concurrency RESTful API & ACID Integrity"
+      },
+      "problem": {
+        "pt": "Concorrência em estoque, rastreabilidade de schema e senhas vulneráveis.",
+        "en": "Inventory concurrency race conditions, schema drift, and vulnerable passwords."
+      },
+      "solution": {
+        "pt": "PostgreSQL 16 com controle transacional ACID, versionamento com Alembic, Argon2-CFFI e operações em lote.",
+        "en": "PostgreSQL 16 with ACID transactional control, Alembic versioning, Argon2-CFFI, and batch operations."
+      },
+      "description": {
+        "pt": "API RESTful de gestão de estoque desenhada para alta concorrência e integridade transacional ACID. Controle de migrações com Alembic, autenticação stateless JWT com hashing Argon2-CFFI, endpoints para operações em lote (bulk) e Docker Compose.",
+        "en": "RESTful inventory management API engineered for high concurrency and ACID transactional integrity. Schema migration control with Alembic, stateless JWT authentication with Argon2-CFFI hashing, bulk operation endpoints, and Docker Compose."
+      },
+      "metrics": [
+        {
+          "label": {
+            "pt": "Integridade Transacional",
+            "en": "Transactional Integrity"
+          },
+          "value": "100% ACID Concorrente"
+        },
+        {
+          "label": {
+            "pt": "Versionamento de Schema",
+            "en": "Schema Versioning"
+          },
+          "value": "Alembic Migrations"
+        },
+        {
+          "label": {
+            "pt": "Segurança de Credenciais",
+            "en": "Credential Security"
+          },
+          "value": "Argon2-CFFI (OWASP)"
+        }
+      ],
+      "tags": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Alembic",
+        "Docker",
+        "Argon2",
+        "JWT"
+      ],
+      "adr": {
+        "decision": {
+          "pt": "Argon2-CFFI + Alembic",
+          "en": "Argon2-CFFI + Alembic"
+        },
+        "discarded": {
+          "pt": "Bcrypt legado e sincronização manual de tabelas",
+          "en": "Legacy Bcrypt and manual table synchronization"
+        },
+        "rationale": {
+          "pt": "Resistência comprovada a ataques de força bruta com GPU (OWASP) e histórico auditável de migrations.",
+          "en": "Proven resistance to GPU brute-force attacks (OWASP) and auditable migration history."
+        }
+      },
+      "url": "https://github.com/ElyssonAlvs/Stock_FASTAPI"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Agile Methodology and AI in Multi-Agent Systems: An agent for planning and executing sprints",
+      "venue": "WESAAC 2025",
+      "venueFullName": {
+        "pt": "Workshop-Escola de Sistemas de Agentes, seus Ambientes e Aplicações — SBBD & BRACIS 2025",
+        "en": "Workshop-School of Agent Systems, their Environments and Applications — SBBD & BRACIS 2025"
+      },
+      "award": {
+        "pt": "WESAAC 2025 (SBC) · Top 3",
+        "en": "WESAAC 2025 (SBC) · Top 3"
+      },
+      "url": "https://sol.sbc.org.br/index.php/wesaac/article/view/37543",
+      "type": "workshop",
+      "abstract": {
+        "pt": "Integração de Sistemas Multiagentes (BDI) e LLMs com n8n para planejamento ágil de sprints e critérios BDD.",
+        "en": "BDI Multi-Agent Systems and LLM integration with n8n for automated agile sprint planning and BDD criteria."
+      }
+    },
+    {
+      "title": "Metodologia Ágil e IA em Sistemas Multiagentes: Avaliação Experimental de uma Arquitetura para Planejamento e Execução de Sprints",
+      "venue": "REIC 2025",
+      "venueFullName": {
+        "pt": "Revista Eletrônica de Iniciação Científica em Computação (SBC)",
+        "en": "Electronic Journal of Scientific Initiation in Computing (SBC)"
+      },
+      "award": null,
+      "url": "https://journals-sol.sbc.org.br/index.php/reic/article/view/7182",
+      "type": "journal",
+      "abstract": {
+        "pt": "Avaliação experimental da arquitetura multiagente com métricas de completude e consistência em backlog.",
+        "en": "Experimental evaluation of multi-agent architecture with backlog completeness and consistency metrics."
+      }
+    },
+    {
+      "title": "Gamificação no Ensino da Gerência de Projetos de Software: uma Revisão Sistemática da Literatura",
+      "venue": "WEI 2025",
+      "venueFullName": {
+        "pt": "Workshop sobre Educação em Computação — CSBC 2025 (45ª Edição)",
+        "en": "Workshop on Computing Education — CSBC 2025 (45th Edition)"
+      },
+      "award": null,
+      "url": "https://sol.sbc.org.br/index.php/wei/article/view/36187",
+      "type": "workshop",
+      "abstract": {
+        "pt": "Revisão sistemática de literatura analisando dinâmicas e mecânicas no ensino de gerência de software.",
+        "en": "Systematic literature review analyzing mechanics and dynamics in software management education."
+      }
+    },
+    {
+      "title": "Acompanhamento de Calouros em Sistemas de Informação: Integração e Suporte no Início da Vida Universitária",
+      "venue": "WEI 2025",
+      "venueFullName": {
+        "pt": "Workshop sobre Educação em Computação — CSBC 2025 (45ª Edição)",
+        "en": "Workshop on Computing Education — CSBC 2025 (45th Edition)"
+      },
+      "award": null,
+      "url": "https://sol.sbc.org.br/index.php/wei/article/view/36226",
+      "type": "workshop",
+      "abstract": {
+        "pt": "Análise de estratégias de tutoria acadêmica e acolhimento para retenção de ingressantes em TI.",
+        "en": "Analysis of academic mentoring strategies and onboarding to improve retention in IT degrees."
+      }
+    },
+    {
+      "title": "MFUP como Estratégia de Ensino para Ingressantes no Curso de Sistemas de Informação",
+      "venue": {
+        "pt": "Encontros Universitários UFC 2025",
+        "en": "UFC University Meetings 2025"
+      },
+      "venueFullName": {
+        "pt": "15ª Edição dos Encontros Universitários da UFC em Quixadá — Dez. 2025",
+        "en": "15th Edition of UFC University Meetings in Quixadá — Dec. 2025"
+      },
+      "award": {
+        "pt": "1º Lugar — Melhor Resumo (Best Paper)",
+        "en": "1st Place — Best Abstract (Best Paper)"
+      },
+      "url": null,
+      "type": "conference",
+      "abstract": {
+        "pt": "Metodologia de facilitação participativa aplicada a calouros com premiação de melhor resumo.",
+        "en": "Participatory facilitation methodology applied to freshmen, awarded Best Abstract paper."
+      }
+    },
+    {
+      "title": "Mapeamento de Processos e BPM no Contexto do Desenvolvimento de Software: um Mapeamento Sistemático da Literatura",
+      "venue": {
+        "pt": "TCC — UFC",
+        "en": "Undergraduate Thesis — UFC"
+      },
+      "venueFullName": {
+        "pt": "Trabalho de Conclusão de Curso — Universidade Federal do Ceará",
+        "en": "Undergraduate Thesis — Federal University of Ceará"
+      },
+      "award": null,
+      "url": "https://repositorio.ufc.br/handle/riufc/85781",
+      "type": "thesis",
+      "abstract": {
+        "pt": "Mapeamento sistemático de literatura sobre integração de BPM e engenharia de software em organizações.",
+        "en": "Systematic literature review on the integration of BPM and software engineering in organizations."
+      }
+    }
+  ],
+  "githubRepositories": [
+    {
+      "name": "REIC_WESAAC_code",
+      "html_url": "https://github.com/ElyssonAlvs/REIC_WESAAC_code",
+      "description": "",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-11-04T19:46:19Z",
+      "topics": []
+    },
+    {
+      "name": "audio-prompt-engine",
+      "html_url": "https://github.com/ElyssonAlvs/audio-prompt-engine",
+      "description": "",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-10-30T22:33:52Z",
+      "topics": []
+    },
+    {
+      "name": "Portf-lio",
+      "html_url": "https://github.com/ElyssonAlvs/Portf-lio",
+      "description": "Site destinado a colocar meus projetos e portfólio de conquistas acadêmica e profissionais",
+      "language": "TypeScript",
+      "stargazers_count": 0,
+      "updated_at": "2026-10-28T22:27:03Z",
+      "topics": []
+    },
+    {
+      "name": "PortLouis_Test",
+      "html_url": "https://github.com/ElyssonAlvs/PortLouis_Test",
+      "description": "",
+      "language": "TypeScript",
+      "stargazers_count": 0,
+      "updated_at": "2026-10-24T17:38:36Z",
+      "topics": []
+    },
+    {
+      "name": "ElyssonAlvs",
+      "html_url": "https://github.com/ElyssonAlvs/ElyssonAlvs",
+      "description": "",
+      "language": "Unknown",
+      "stargazers_count": 0,
+      "updated_at": "2026-10-12T22:30:35Z",
+      "topics": []
+    },
+    {
+      "name": "agentic-triage",
+      "html_url": "https://github.com/ElyssonAlvs/agentic-triage",
+      "description": " Agentic Triage Engine é um sistema de triagem conversacional para clínicas que converte perguntas em consultas Text-to-SQL e une FastAPI, LangGraph, FastMCP, Groq Llama e PostgreSQL para reduzir custo de tokens, prevenir alucinações e incluir Human-in-the-Loop com interfaces web e deploy via Docker.",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-08-23T00:53:18Z",
+      "topics": [
+        "fastapi",
+        "langgraph",
+        "postgresql",
+        "postgresql-database",
+        "sql"
+      ]
+    },
+    {
+      "name": "TaskAgentV2",
+      "html_url": "https://github.com/ElyssonAlvs/TaskAgentV2",
+      "description": "Uma orquestração de agentes para gerenciamento de tarefas",
+      "language": "HTML",
+      "stargazers_count": 0,
+      "updated_at": "2026-07-18T01:29:28Z",
+      "topics": [
+        "api-rest",
+        "crewai",
+        "langgraph"
+      ]
+    },
+    {
+      "name": "Exercise_of_Python",
+      "html_url": "https://github.com/ElyssonAlvs/Exercise_of_Python",
+      "description": "",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-07-08T19:49:28Z",
+      "topics": []
+    },
+    {
+      "name": "dslist",
+      "html_url": "https://github.com/ElyssonAlvs/dslist",
+      "description": "Repositório destinado a criação de uma API em Java Spring, feito durante o Intensivão Java Spring do professor Nélio Alves.",
+      "language": "Java",
+      "stargazers_count": 0,
+      "updated_at": "2026-07-08T19:48:08Z",
+      "topics": []
+    },
+    {
+      "name": "FinanceBOT",
+      "html_url": "https://github.com/ElyssonAlvs/FinanceBOT",
+      "description": "Uma automação via n8n localhost usando Groq API, RAG e API do Telegram para registro financeiro",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-07-08T14:22:24Z",
+      "topics": [
+        "bot",
+        "llm",
+        "rag"
+      ]
+    },
+    {
+      "name": "RAG_Fundamentals",
+      "html_url": "https://github.com/ElyssonAlvs/RAG_Fundamentals",
+      "description": "Repositório para hospedar aprendizados sobre RAG ( Retrieval Argument Generation)",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-06-09T00:59:12Z",
+      "topics": [
+        "fundamentals",
+        "rag"
+      ]
+    },
+    {
+      "name": "TaskAgent",
+      "html_url": "https://github.com/ElyssonAlvs/TaskAgent",
+      "description": "A lightweight AI agent that integrates with a FastAPI Task Manager API, enabling CRUD operation using natural language via LLM-powered interactions.",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-04-30T00:55:25Z",
+      "topics": []
+    },
+    {
+      "name": "fastapi-task-manager",
+      "html_url": "https://github.com/ElyssonAlvs/fastapi-task-manager",
+      "description": "A simple Task Manager API built with FastAPI, featuring CRUD operations, filtering, and pagination.",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-04-28T01:38:45Z",
+      "topics": []
+    },
+    {
+      "name": "Stock_FASTAPI",
+      "html_url": "https://github.com/ElyssonAlvs/Stock_FASTAPI",
+      "description": "A simple manager stock making with FASTAPI",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-04-24T03:07:15Z",
+      "topics": []
+    },
+    {
+      "name": "Mineracao_de_Dados",
+      "html_url": "https://github.com/ElyssonAlvs/Mineracao_de_Dados",
+      "description": "Repositório destinado para os conteúdos e práticas da cadeira de Mineração de Dados, com foco na linguagem Python e suas bibliotecas na área de dados.",
+      "language": "Jupyter Notebook",
+      "stargazers_count": 0,
+      "updated_at": "2025-03-07T20:01:47Z",
+      "topics": []
+    }
+  ],
+  "generatedAt": "2026-11-04T20:54:04.553Z"
+}
