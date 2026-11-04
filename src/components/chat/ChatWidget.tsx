@@ -30,6 +30,48 @@ export const ChatWidget: React.FC = () => {
   const [isStreaming, setIsStreaming] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // Balãozinho (tooltip) convidativo inicial
+  const [showTooltip, setShowTooltip] = useState(false);
+  const hasInteractedRef = useRef(false);
+
+  const handleDismissTooltip = useCallback((e?: React.MouseEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    hasInteractedRef.current = true;
+    setShowTooltip(false);
+  }, []);
+
+  // Timer para exibir o balãozinho convidativo após 2.5s se o chat ainda estiver fechado
+  useEffect(() => {
+    if (isOpen) {
+      setShowTooltip(false);
+      hasInteractedRef.current = true;
+      return;
+    }
+
+    if (hasInteractedRef.current) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setShowTooltip(true);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, [isOpen]);
+
+  // Escuta evento customizado 'open-ai-chat' disparado pelo botão do Hero ou outros pontos
+  useEffect(() => {
+    const handleOpenChat = () => {
+      setIsOpen(true);
+      setShowTooltip(false);
+      hasInteractedRef.current = true;
+    };
+    window.addEventListener('open-ai-chat', handleOpenChat);
+    return () => window.removeEventListener('open-ai-chat', handleOpenChat);
+  }, []);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -258,10 +300,66 @@ export const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* ── Botão Flutuante (Launcher) ─────────────────────────────────── */}
+      {/* ── Balãozinho Convidativo Inicial (Tooltip - Solução 2) ──────── */}
+      {!isOpen && (
+        <div
+          role="status"
+          aria-live="polite"
+          aria-hidden={!showTooltip}
+          className={`fixed bottom-[4.5rem] right-4 sm:bottom-20 sm:right-6 z-50 max-w-[280px] sm:max-w-[320px] p-3 rounded-xl bg-white dark:bg-[#121215] text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-800 shadow-xl shadow-black/10 dark:shadow-black/60 transition-all duration-300 ease-out motion-reduce:transition-none cursor-pointer group select-none ${
+            showTooltip
+              ? 'opacity-100 translate-y-0 pointer-events-auto'
+              : 'opacity-0 translate-y-2 pointer-events-none'
+          }`}
+          onClick={() => {
+            if (!showTooltip) return;
+            setIsOpen(true);
+            handleDismissTooltip();
+          }}
+        >
+          <div className="flex items-start gap-2.5">
+            <span className="text-base select-none shrink-0 leading-none pt-0.5" aria-hidden="true">
+              👋
+            </span>
+            <p className="text-xs font-sans text-neutral-600 dark:text-neutral-300 leading-snug flex-1 select-none">
+              {language === 'pt' ? (
+                <>
+                  Dúvidas sobre minhas <span className="font-semibold text-neutral-900 dark:text-white">stacks</span> ou <span className="font-semibold text-neutral-900 dark:text-white">projetos</span>? Pergunte à minha IA!
+                </>
+              ) : (
+                <>
+                  Questions about my <span className="font-semibold text-neutral-900 dark:text-white">stacks</span> or <span className="font-semibold text-neutral-900 dark:text-white">projects</span>? Ask my AI!
+                </>
+              )}
+            </p>
+            <button
+              type="button"
+              tabIndex={showTooltip ? 0 : -1}
+              onClick={handleDismissTooltip}
+              aria-label={t.tooltip_dismiss || (language === 'pt' ? 'Dispensar aviso' : 'Dismiss notice')}
+              className="p-1 -mr-1 -mt-1 text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-400 transition-colors"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          {/* Seta sutil apontando para o launcher flutuante */}
+          <div
+            aria-hidden="true"
+            className="absolute -bottom-1.5 right-6 sm:right-8 w-3 h-3 rotate-45 bg-white dark:bg-[#121215] border-r border-b border-neutral-200 dark:border-neutral-800"
+          />
+        </div>
+      )}
+
+      {/* ── Botão Flutuante (Launcher - Solução 1 Pill) ────────────────── */}
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          setIsOpen((prev) => {
+            const next = !prev;
+            if (next) handleDismissTooltip();
+            return next;
+          });
+        }}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
         aria-label={isOpen ? t.button_aria_close : t.button_aria_open}
@@ -281,7 +379,16 @@ export const ChatWidget: React.FC = () => {
         )}
 
         <span className="text-xs font-semibold tracking-wide font-mono text-neutral-200 group-hover:text-white transition-colors duration-150">
-          {isOpen ? (language === 'pt' ? 'Fechar' : 'Close') : 'IA'}
+          {isOpen ? (
+            language === 'pt' ? 'Fechar' : 'Close'
+          ) : (
+            <>
+              <span className="sm:hidden">IA</span>
+              <span className="hidden sm:inline">
+                {t.launcher_text || (language === 'pt' ? 'Pergunte à IA' : 'Ask AI')}
+              </span>
+            </>
+          )}
         </span>
       </button>
 

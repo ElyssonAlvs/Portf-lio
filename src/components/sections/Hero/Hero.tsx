@@ -46,6 +46,17 @@ const DownloadIcon = () => (
   </svg>
 );
 
+const BotIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+    <path d="M12 8V4H8" />
+    <rect width="16" height="12" x="4" y="8" rx="2" />
+    <path d="M2 14h2" />
+    <path d="M20 14h2" />
+    <path d="M15 13v2" />
+    <path d="M9 13v2" />
+  </svg>
+);
+
 export const Hero = ({ setActiveTab }: HeroProps) => {
   const { language } = useLanguage();
   const tHero = translations[language].hero;
@@ -115,6 +126,23 @@ export const Hero = ({ setActiveTab }: HeroProps) => {
               >
                 <span>{tHero.cta_projects}</span>
                 <ArrowDownIcon />
+              </Button>
+
+              <Button
+                type="button"
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent('open-ai-chat'));
+                }}
+                variant="outline"
+                size="sm"
+                className="h-9 px-3 rounded-md font-mono text-xs border border-[var(--border)] text-[var(--text-primary)] hover:border-[var(--accent)] transition-colors whitespace-nowrap gap-1.5"
+              >
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <BotIcon />
+                <span>{tHero.cta_ai || (language === 'pt' ? 'Perguntar à IA' : 'Ask AI')}</span>
               </Button>
 
               <Button
