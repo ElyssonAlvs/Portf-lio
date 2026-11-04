@@ -35,6 +35,27 @@ export const ChatWidget: React.FC = () => {
   const abortControllerRef = useRef<AbortController | null>(null);
   const lastUserPromptRef = useRef<string>('');
 
+  // Auto-resize textarea dynamically based on scrollHeight (1 line up to ~120px)
+  const adjustTextareaHeight = useCallback(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    const nextHeight = Math.min(el.scrollHeight, 120);
+    el.style.height = `${nextHeight}px`;
+    el.style.overflowY = el.scrollHeight > 120 ? 'auto' : 'hidden';
+  }, []);
+
+  const resetTextareaHeight = useCallback(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.overflowY = 'hidden';
+  }, []);
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [inputValue, adjustTextareaHeight]);
+
   // Initialize or reset welcome message on mount or language switch if conversation is fresh
   useEffect(() => {
     setMessages((prev) => {
@@ -122,6 +143,7 @@ export const ChatWidget: React.FC = () => {
     }
     setErrorMessage(null);
     setInputValue('');
+    resetTextareaHeight();
     setMessages([
       {
         id: `welcome-${Date.now()}`,
@@ -141,6 +163,7 @@ export const ChatWidget: React.FC = () => {
     lastUserPromptRef.current = trimmed;
     setErrorMessage(null);
     setInputValue('');
+    resetTextareaHeight();
 
     const userMessage: Message = {
       id: `user-${Date.now()}`,
@@ -242,10 +265,12 @@ export const ChatWidget: React.FC = () => {
         aria-expanded={isOpen}
         aria-haspopup="dialog"
         aria-label={isOpen ? t.button_aria_close : t.button_aria_open}
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2.5 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full bg-[#0a0a0a] text-white border border-neutral-700 hover:border-neutral-500 shadow-xl shadow-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-transform duration-150 active:scale-95 group"
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 ${
+          isOpen ? 'hidden sm:flex' : 'flex'
+        } items-center gap-2.5 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full bg-neutral-900 dark:bg-[#0a0a0a] text-white border border-neutral-700 hover:border-neutral-500 shadow-xl shadow-black/30 dark:shadow-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black transition-transform duration-150 active:scale-95 group`}
       >
         <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
         </span>
 
@@ -260,23 +285,28 @@ export const ChatWidget: React.FC = () => {
         </span>
       </button>
 
-      {/* ── Janela do Chat (Drawer / Modal Flutuante) ────────────────── */}
+      {/* ── Janela do Chat (Bottom Sheet Mobile / Drawer Desktop) ─────── */}
       {isOpen && (
         <div
           role="dialog"
           aria-modal="false"
           aria-label={t.widget_title}
-          className="fixed bottom-16 right-4 left-4 sm:left-auto sm:right-6 sm:bottom-20 z-50 sm:w-[410px] h-[520px] max-h-[calc(100vh-6.5rem)] flex flex-col bg-[#0a0a0a] border border-neutral-800 rounded-2xl shadow-2xl shadow-black/80 overflow-hidden [overflow-x:clip] animate-in fade-in slide-in-from-bottom-2 duration-200"
+          className="fixed inset-x-0 bottom-0 sm:bottom-20 sm:right-6 sm:left-auto sm:w-[420px] h-[88vh] sm:h-[540px] max-h-[100dvh] z-50 flex flex-col bg-white dark:bg-[#0a0a0a] border-t sm:border border-neutral-200 dark:border-neutral-800 rounded-t-2xl sm:rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/80 overflow-hidden [overflow-x:clip] animate-in fade-in slide-in-from-bottom-2 duration-200 motion-reduce:animate-none"
         >
+          {/* Barra sutil de arrastar/handle no topo em telas mobile */}
+          <div className="sm:hidden w-full pt-2 pb-0.5 bg-neutral-50 dark:bg-[#0e0e11] shrink-0">
+            <div className="w-10 h-1 bg-neutral-300 dark:bg-neutral-700 rounded-full mx-auto my-1.5" />
+          </div>
+
           {/* Cabeçalho */}
-          <div className="flex items-center justify-between px-4 py-3 bg-[#0e0e11] border-b border-neutral-800 shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-[#0e0e11] border-b border-neutral-200 dark:border-neutral-800 shrink-0">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-7 h-7 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center shrink-0">
-                <Bot className="w-4 h-4 text-neutral-200" />
+              <div className="w-7 h-7 rounded-lg bg-neutral-200/80 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 flex items-center justify-center shrink-0">
+                <Bot className="w-4 h-4 text-neutral-700 dark:text-neutral-200" />
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-xs sm:text-sm font-semibold text-white tracking-tight truncate">
+                  <h3 className="text-xs sm:text-sm font-semibold text-neutral-900 dark:text-white tracking-tight truncate">
                     {t.widget_title}
                   </h3>
                   <span
@@ -284,7 +314,7 @@ export const ChatWidget: React.FC = () => {
                     title={t.status_online}
                   />
                 </div>
-                <p className="text-[11px] text-neutral-400 font-mono truncate">
+                <p className="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono truncate">
                   {isStreaming ? t.status_streaming : t.widget_subtitle}
                 </p>
               </div>
@@ -296,7 +326,7 @@ export const ChatWidget: React.FC = () => {
                 onClick={handleResetConversation}
                 aria-label={t.clear_aria}
                 title={t.clear_aria}
-                className="p-1.5 rounded-md text-neutral-400 hover:text-white hover:bg-neutral-800/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white transition-colors duration-150"
+                className="p-1.5 rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200/70 dark:hover:bg-neutral-800/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 dark:focus-visible:ring-white transition-colors duration-150"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -305,7 +335,7 @@ export const ChatWidget: React.FC = () => {
                 onClick={() => setIsOpen(false)}
                 aria-label={t.button_aria_close}
                 title={t.button_aria_close}
-                className="p-1.5 rounded-md text-neutral-400 hover:text-white hover:bg-neutral-800/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white transition-colors duration-150"
+                className="p-1.5 rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200/70 dark:hover:bg-neutral-800/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 dark:focus-visible:ring-white transition-colors duration-150"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -314,7 +344,7 @@ export const ChatWidget: React.FC = () => {
 
           {/* Área de Mensagens com scroll automático suave */}
           <div
-            className="flex-1 overflow-y-auto [overflow-x:clip] p-4 space-y-3.5 text-neutral-200"
+            className="flex-1 overflow-y-auto [overflow-x:clip] p-4 space-y-3.5 text-neutral-800 dark:text-neutral-200"
             aria-live="polite"
           >
             {messages.map((message) => (
@@ -329,8 +359,8 @@ export const ChatWidget: React.FC = () => {
 
             {/* Chips de Perguntas Rápidas (Estado Inicial) */}
             {isOnlyWelcome && !isStreaming && (
-              <div className="pt-2 space-y-2">
-                <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-400 px-1">
+              <div className="pt-2 space-y-2 [overflow-x:clip]">
+                <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 px-1">
                   {language === 'pt' ? 'Sugestões rápidas' : 'Quick questions'}
                 </p>
                 <div className="flex flex-col gap-1.5">
@@ -339,7 +369,7 @@ export const ChatWidget: React.FC = () => {
                       key={idx}
                       type="button"
                       onClick={() => executeSend(question)}
-                      className="text-left text-xs text-neutral-300 hover:text-white bg-[#121215] hover:bg-neutral-800/90 border border-neutral-800 hover:border-neutral-700 px-3 py-2 rounded-lg transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-400"
+                      className="text-left text-xs bg-neutral-100 hover:bg-neutral-200 text-neutral-800 border border-neutral-200 hover:border-neutral-300 dark:bg-[#121215] dark:hover:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-700 px-3 py-2 rounded-lg transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-400"
                     >
                       {question}
                     </button>
@@ -350,15 +380,15 @@ export const ChatWidget: React.FC = () => {
 
             {/* Tratamento de Erro Elegante (Rate limit 429 ou indisponibilidade) */}
             {errorMessage && (
-              <div className="bg-red-950/20 border border-red-900/40 text-red-200 text-xs p-3 rounded-lg flex items-start gap-2.5">
-                <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
-                <div className="flex-1 space-y-1.5">
-                  <p className="leading-relaxed">{errorMessage}</p>
+              <div className="bg-red-500/10 border border-red-500/30 text-red-700 dark:bg-red-950/20 dark:border-red-900/40 dark:text-red-200 text-xs p-3 rounded-lg flex items-start gap-2.5 [overflow-x:clip]">
+                <AlertCircle className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
+                <div className="flex-1 space-y-1.5 min-w-0">
+                  <p className="leading-relaxed break-words">{errorMessage}</p>
                   {lastUserPromptRef.current && !isStreaming && (
                     <button
                       type="button"
                       onClick={() => executeSend(lastUserPromptRef.current)}
-                      className="inline-flex items-center text-[11px] font-mono font-medium text-red-300 hover:text-white underline decoration-red-600 hover:decoration-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-400 rounded transition-colors duration-150"
+                      className="inline-flex items-center text-[11px] font-mono font-medium text-red-700 dark:text-red-300 hover:text-red-900 dark:hover:text-white underline decoration-red-400 dark:decoration-red-600 hover:decoration-red-900 dark:hover:decoration-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-500 rounded transition-colors duration-150"
                     >
                       {t.retry}
                     </button>
@@ -370,8 +400,8 @@ export const ChatWidget: React.FC = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Área de Entrada (Input Bar) */}
-          <div className="p-3 bg-[#0e0e11] border-t border-neutral-800 shrink-0">
+          {/* Área de Entrada (Input Bar) com suporte a safe area mobile */}
+          <div className="p-3 pb-[env(safe-area-inset-bottom,16px)] bg-neutral-50 dark:bg-[#0e0e11] border-t border-neutral-200 dark:border-neutral-800 shrink-0 [overflow-x:clip]">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -379,7 +409,7 @@ export const ChatWidget: React.FC = () => {
               }}
               className="space-y-2"
             >
-              <div className="relative flex items-center bg-[#121215] border border-neutral-800 focus-within:border-neutral-600 rounded-xl px-3 py-2 transition-colors duration-150">
+              <div className="relative flex items-center bg-neutral-100 dark:bg-[#121215] border border-neutral-300 dark:border-neutral-800 focus-within:border-neutral-500 dark:focus-within:border-neutral-600 rounded-xl px-3 py-2 transition-colors duration-150">
                 <textarea
                   ref={textareaRef}
                   rows={1}
@@ -388,17 +418,17 @@ export const ChatWidget: React.FC = () => {
                   onKeyDown={handleKeyDown}
                   placeholder={t.input_placeholder}
                   disabled={isStreaming}
-                  className="w-full bg-transparent text-xs sm:text-sm text-neutral-100 placeholder:text-neutral-500 resize-none outline-none focus:outline-none focus-visible:outline-none max-h-24 disabled:opacity-50"
+                  className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 resize-none outline-none focus:outline-none focus-visible:outline-none disabled:opacity-50 [overflow-x:clip]"
                 />
 
-                <div className="flex items-center gap-1.5 pl-2 shrink-0">
+                <div className="flex items-center gap-1.5 pl-2 shrink-0 self-end mb-0.5">
                   {isStreaming ? (
                     <button
                       type="button"
                       onClick={handleStopStream}
                       aria-label={t.stop_aria}
                       title={t.stop_aria}
-                      className="p-1.5 rounded-lg bg-neutral-800 text-neutral-200 hover:bg-neutral-700 hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white transition-colors duration-150"
+                      className="p-1.5 rounded-lg bg-neutral-200 text-neutral-800 hover:bg-neutral-300 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 dark:focus-visible:ring-white transition-colors duration-150"
                     >
                       <Square className="w-3.5 h-3.5 fill-current" />
                     </button>
@@ -408,7 +438,7 @@ export const ChatWidget: React.FC = () => {
                       disabled={!inputValue.trim() || inputValue.length > 500}
                       aria-label={t.send_aria}
                       title={t.send_aria}
-                      className="p-1.5 rounded-lg bg-white text-black hover:bg-neutral-200 disabled:opacity-30 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-400 transition-colors duration-150"
+                      className="p-1.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 disabled:opacity-30 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-400 transition-colors duration-150"
                     >
                       <Send className="w-3.5 h-3.5" />
                     </button>
@@ -417,12 +447,12 @@ export const ChatWidget: React.FC = () => {
               </div>
 
               {/* Rodapé com Contador de Caracteres e Disclaimer Factual */}
-              <div className="flex items-center justify-between text-[10px] text-neutral-400 px-1 font-mono">
+              <div className="flex items-center justify-between text-[10px] text-neutral-500 dark:text-neutral-400 px-1 font-mono">
                 <span className="truncate pr-2">{t.disclaimer}</span>
                 <span
                   className={
                     inputValue.length >= 450
-                      ? 'text-amber-400 font-semibold shrink-0'
+                      ? 'text-amber-600 dark:text-amber-400 font-semibold shrink-0'
                       : 'shrink-0'
                   }
                 >

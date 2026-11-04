@@ -371,42 +371,50 @@ export async function handler(
 
   let streamResponse: Response | null = null;
 
-  // Primary: Groq API (Llama 3.3 70B)
+  // Primary: Groq API (fallback models: gpt-oss-120b, gpt-oss-20b, llama-3.3-70b-versatile)
   if (groqApiKey) {
-    try {
-      const groqRes = await groqFetch(
-        'https://api.groq.com/openai/v1/chat/completions',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${groqApiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: 'llama-3.3-70b-versatile',
-            messages: [
-              { role: 'system', content: systemPrompt },
-              { role: 'user', content: cleanMessage },
-            ],
-            temperature: 0.2,
-            max_tokens: 300,
-            stream: true,
-          }),
-          signal: AbortSignal.timeout(8000),
-        }
-      );
+    const groqModels = [
+      'openai/gpt-oss-120b',
+      'openai/gpt-oss-20b',
+      'llama-3.3-70b-versatile',
+    ];
+    for (const model of groqModels) {
+      try {
+        const groqRes = await groqFetch(
+          'https://api.groq.com/openai/v1/chat/completions',
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${groqApiKey}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              model,
+              messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: cleanMessage },
+              ],
+              temperature: 0.2,
+              max_tokens: 300,
+              stream: true,
+            }),
+            signal: AbortSignal.timeout(8000),
+          }
+        );
 
-      if (groqRes.ok && groqRes.body) {
-        streamResponse = groqRes;
-      } else {
+        if (groqRes.ok && groqRes.body) {
+          streamResponse = groqRes;
+          break;
+        } else {
+          console.warn(
+            `[api/chat] Groq API (${model}) returned status ${groqRes.status}. Trying next model or fallback.`
+          );
+        }
+      } catch (err: any) {
         console.warn(
-          `[api/chat] Groq API returned status ${groqRes.status}. Activating Gemini fallback.`
+          `[api/chat] Groq API (${model}) failed (${err?.message || err}). Trying next model or fallback.`
         );
       }
-    } catch (err: any) {
-      console.warn(
-        `[api/chat] Groq API failed (${err?.message || err}). Activating Gemini fallback.`
-      );
     }
   }
 

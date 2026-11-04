@@ -208,6 +208,50 @@ describe('POST /api/chat - Validação e Segurança', () => {
     );
   });
 
+  it('deve tentar a lista de modelos Groq em sequência (openai/gpt-oss-120b, openai/gpt-oss-20b, llama-3.3-70b-versatile)', async () => {
+    const attempts = [];
+    const expectedGroqModels = [
+      'openai/gpt-oss-120b',
+      'openai/gpt-oss-20b',
+      'llama-3.3-70b-versatile',
+    ];
+
+    const mockGroqFetch = async (url, options) => {
+      const parsedBody = JSON.parse(options.body);
+      attempts.push({
+        url,
+        headers: options.headers,
+        model: parsedBody.model,
+      });
+
+      if (parsedBody.model === 'openai/gpt-oss-120b') {
+        return new Response(JSON.stringify({ error: { message: 'Model not found' } }), {
+          status: 404,
+        });
+      }
+
+      return createMockSseResponse(['Resposta do gpt-oss-20b']);
+    };
+
+    const req = new Request('http://localhost/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Qual a sua experiência?' }),
+    });
+
+    const res = await handler(req, {
+      groqFetch: mockGroqFetch,
+      groqApiKey: 'test-groq-key',
+    });
+
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(attempts.length, 2);
+    assert.strictEqual(attempts[0].model, 'openai/gpt-oss-120b');
+    assert.strictEqual(attempts[1].model, 'openai/gpt-oss-20b');
+    const streamedText = await readResponseText(res);
+    assert.strictEqual(streamedText, 'Resposta do gpt-oss-20b');
+  });
+
   it('deve ativar automaticamente o fallback para Gemini se a API da Groq retornar status 429/500 ou timeout', async () => {
     let groqCalled = false;
     let geminiCalled = false;
