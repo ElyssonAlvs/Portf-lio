@@ -363,6 +363,12 @@ export async function handler(
   const groqFetch = options.groqFetch || fetch;
   const geminiFetch = options.geminiFetch || fetch;
 
+  if (!groqApiKey && !geminiApiKey) {
+    console.error(
+      '[api/chat] Nenhuma API Key configurada (GROQ_API_KEY ou GEMINI_API_KEY). Verifique as variáveis de ambiente na Vercel.'
+    );
+  }
+
   let streamResponse: Response | null = null;
 
   // Primary: Groq API (Llama 3.3 70B)
@@ -404,42 +410,59 @@ export async function handler(
     }
   }
 
-  // Fallback: Gemini API (gemini-2.5-flash via OpenAI-compatible endpoint)
+  // Fallback: Gemini API (prioritizing high-quota models via OpenAI-compatible endpoint)
   if (!streamResponse && geminiApiKey) {
-    try {
-      const geminiRes = await geminiFetch(
-        'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${geminiApiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: 'gemini-2.5-flash',
-            messages: [
-              { role: 'system', content: systemPrompt },
-              { role: 'user', content: cleanMessage },
-            ],
-            temperature: 0.2,
-            max_tokens: 300,
-            stream: true,
-          }),
-          signal: AbortSignal.timeout(8000),
-        }
-      );
+    const geminiModels = [
+      'gemini-3.1-flash-lite',
+      'gemini-3.5-flash-lite',
+      'gemini-2.5-flash',
+      'gemini-3.8-flash',
+      'gemini-1.5-flash',
+    ];
+    for (const model of geminiModels) {
+      try {
+        const geminiRes = await geminiFetch(
+          `https://generativelanguage.googleapis.com/v1beta/openai/chat/completions?key=${geminiApiKey}`,
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${geminiApiKey}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              model,
+              messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: cleanMessage },
+              ],
+              temperature: 0.2,
+              max_tokens: 300,
+              stream: true,
+            }),
+            signal: AbortSignal.timeout(8000),
+          }
+        );
 
-      if (geminiRes.ok && geminiRes.body) {
-        streamResponse = geminiRes;
-      } else {
+        if (geminiRes.ok && geminiRes.body) {
+          streamResponse = geminiRes;
+          break;
+        } else {
+          let errorText = '';
+          try {
+            errorText =
+              typeof geminiRes.text === 'function' ? await geminiRes.text() : '';
+          } catch {
+            // ignore error reading response body
+          }
+          console.error(
+            `[api/chat] Gemini API (${model}) failed with status ${geminiRes.status}: ${errorText}`
+          );
+        }
+      } catch (err: any) {
         console.error(
-          `[api/chat] Gemini API fallback failed with status ${geminiRes.status}.`
+          `[api/chat] Gemini API (${model}) threw error (${err?.message || err}).`
         );
       }
-    } catch (err: any) {
-      console.error(
-        `[api/chat] Gemini API fallback threw error (${err?.message || err}).`
-      );
     }
   }
 

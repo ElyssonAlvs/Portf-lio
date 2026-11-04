@@ -279,6 +279,93 @@ describe('POST /api/chat - Validação e Segurança', () => {
     assert.match(body.error, /temporariamente indisponível/i);
   });
 
+  it('deve priorizar modelos com maior cota (gemini-3.1-flash-lite, 3.5-flash-lite, etc.) e fazer fallback em sequência', async () => {
+    const attempts = [];
+    const expectedModels = [
+      'gemini-3.1-flash-lite',
+      'gemini-3.5-flash-lite',
+      'gemini-2.5-flash',
+      'gemini-3.8-flash',
+      'gemini-1.5-flash',
+    ];
+
+    const mockGeminiFetch = async (url, options) => {
+      const parsedBody = JSON.parse(options.body);
+      attempts.push({
+        url,
+        headers: options.headers,
+        model: parsedBody.model,
+      });
+
+      if (parsedBody.model !== 'gemini-1.5-flash') {
+        return new Response(JSON.stringify({ error: 'Model quota exceeded or unavailable' }), {
+          status: 429,
+        });
+      }
+
+      return createMockSseResponse(['Resposta do modelo 1.5 flash']);
+    };
+
+    const req = new Request('http://localhost/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Como posso entrar em contato com Elysson?' }),
+    });
+
+    const res = await handler(req, {
+      geminiFetch: mockGeminiFetch,
+      geminiApiKey: 'test-gemini-key-123',
+    });
+
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(attempts.length, 5, 'Should attempt all fallback models in order');
+    assert.deepStrictEqual(
+      attempts.map((a) => a.model),
+      expectedModels
+    );
+    assert.ok(
+      attempts[0].url.includes('key=test-gemini-key-123'),
+      'URL must include key query param'
+    );
+    assert.strictEqual(
+      attempts[0].headers.Authorization,
+      'Bearer test-gemini-key-123',
+      'Authorization header must include bearer token'
+    );
+
+    const streamedText = await readResponseText(res);
+    assert.strictEqual(streamedText, 'Resposta do modelo 1.5 flash');
+  });
+
+  it('deve registrar erro explícito quando nenhuma API key estiver configurada', async () => {
+    const originalError = console.error;
+    let loggedMessage = '';
+    console.error = (msg) => {
+      loggedMessage = msg;
+    };
+
+    try {
+      const req = new Request('http://localhost/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Olá!' }),
+      });
+
+      const res = await handler(req, {
+        groqApiKey: '',
+        geminiApiKey: '',
+      });
+
+      assert.strictEqual(res.status, 503);
+      assert.match(
+        loggedMessage,
+        /Nenhuma API Key configurada \(GROQ_API_KEY ou GEMINI_API_KEY\)/
+      );
+    } finally {
+      console.error = originalError;
+    }
+  });
+
   it('deve extrair IP do cabeçalho x-forwarded-for com múltiplos proxies', () => {
     const req = new Request('http://localhost/api/chat', {
       method: 'POST',
