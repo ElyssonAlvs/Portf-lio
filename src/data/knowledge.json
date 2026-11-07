@@ -646,6 +646,15 @@
   ],
   "githubRepositories": [
     {
+      "name": "Portf-lio",
+      "html_url": "https://github.com/ElyssonAlvs/Portf-lio",
+      "description": "Site destinado a colocar meus projetos e portfólio de conquistas acadêmica e profissionais",
+      "language": "TypeScript",
+      "stargazers_count": 0,
+      "updated_at": "2026-11-07T20:50:38Z",
+      "topics": []
+    },
+    {
       "name": "REIC_WESAAC_code",
       "html_url": "https://github.com/ElyssonAlvs/REIC_WESAAC_code",
       "description": "",
@@ -661,15 +670,6 @@
       "language": "Python",
       "stargazers_count": 0,
       "updated_at": "2026-11-05T20:24:48Z",
-      "topics": []
-    },
-    {
-      "name": "Portf-lio",
-      "html_url": "https://github.com/ElyssonAlvs/Portf-lio",
-      "description": "Site destinado a colocar meus projetos e portfólio de conquistas acadêmica e profissionais",
-      "language": "TypeScript",
-      "stargazers_count": 0,
-      "updated_at": "2026-11-04T22:16:52Z",
       "topics": []
     },
     {
@@ -798,5 +798,5 @@
       "topics": []
     }
   ],
-  "generatedAt": "2026-11-07T20:49:39.474Z"
+  "generatedAt": "2026-11-07T21:09:08.178Z"
 }

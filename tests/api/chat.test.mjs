@@ -7,6 +7,7 @@ import {
   detectPromptInjection,
   validateMessage,
   getClientIp,
+  buildSystemPrompt,
 } from '../../api/chat.ts';
 
 // Helper to create SSE stream mock for OpenAI-compatible APIs (Groq / Gemini)
@@ -419,5 +420,96 @@ describe('POST /api/chat - Validação e Segurança', () => {
     });
     const ip = getClientIp(req);
     assert.strictEqual(ip, '203.0.113.195');
+  });
+
+  it('deve incluir regras de blindagem factual estrita e dados enriquecidos de projetos no buildSystemPrompt', () => {
+    const mockKnowledge = {
+      profile: { name: 'Elysson Alves' },
+      projects: [
+        {
+          name: 'FinanceBOT',
+          category: { pt: 'Assistente Financeiro com RAG' },
+          subtitle: { pt: 'Assistente Financeiro com RAG Híbrido & n8n' },
+          problem: { pt: 'Fricção em planilhas e imprecisão de cálculos numéricos.' },
+          solution: { pt: 'Persistência Híbrida combinando Analytics Exato em Python e ChromaDB.' },
+          tags: ['Python', 'n8n', 'Groq', 'ChromaDB'],
+          adr: {
+            decision: { pt: 'Persistência Híbrida (CSV/Banco + ChromaDB)' },
+            rationale: { pt: 'Modelos vetoriais alucinam em somas exatas de despesas.' },
+          },
+          metrics: [
+            { label: { pt: 'Estratégia de Busca RAG' }, value: 'Híbrida (CSV + ChromaDB)' },
+          ],
+          url: 'https://github.com/ElyssonAlvs/FinanceBOT',
+        },
+        {
+          name: 'Agentic Triage Engine',
+          category: 'AI Agent',
+          subtitle: 'Autonomous Triage',
+          problem: 'High token costs',
+          solution: 'FastMCP stdio',
+          tags: [{ pt: 'FastMCP' }, { pt: 'Python' }],
+          keyDecisions: [
+            { title: 'FastMCP stdio', rationale: 'Tool isolation' },
+          ],
+          metrics: [{ label: 'Latency', value: '150ms' }],
+          url: 'https://github.com/ElyssonAlvs/agentic-triage',
+        },
+      ],
+    };
+
+    const prompt = buildSystemPrompt(mockKnowledge);
+
+    // Rule 3 factual fidelity check
+    assert.match(
+      prompt,
+      /3\. Responda exclusivamente com base nas informações factuais fornecidas no CONTEXTO abaixo\. Nunca invente dados, bibliotecas, bancos de dados, números ou ferramentas que não estejam expressamente citados\. Se um detalhe técnico específico não constar no contexto, diga claramente que essa informação detalhada não está registrada no portfólio e direcione para o repositório GitHub do projeto\./
+    );
+
+    // Project enrichment check
+    assert.match(prompt, /Subtítulo: Assistente Financeiro com RAG Híbrido & n8n/);
+    assert.match(prompt, /Problema: Fricção em planilhas e imprecisão de cálculos numéricos\./);
+    assert.match(prompt, /Solução: Persistência Híbrida combinando Analytics Exato em Python e ChromaDB\./);
+    assert.match(prompt, /Decisões Técnicas: Persistência Híbrida \(CSV\/Banco \+ ChromaDB\): Modelos vetoriais alucinam em somas exatas de despesas\./);
+    assert.match(prompt, /Métricas: Estratégia de Busca RAG: Híbrida \(CSV \+ ChromaDB\)/);
+    assert.match(prompt, /Tags: Python, n8n, Groq, ChromaDB/);
+    assert.match(prompt, /URL: https:\/\/github\.com\/ElyssonAlvs\/FinanceBOT/);
+
+    // keyDecisions format check
+    assert.match(prompt, /Decisões Técnicas: FastMCP stdio: Tool isolation/);
+  });
+
+  it('deve configurar max_tokens como 800 nas requisições para Groq e Gemini', async () => {
+    let groqMaxTokens = null;
+    let geminiMaxTokens = null;
+
+    const mockGroq = async (url, options) => {
+      const parsed = JSON.parse(options.body);
+      groqMaxTokens = parsed.max_tokens;
+      return new Response(JSON.stringify({ error: 'fail' }), { status: 500 });
+    };
+
+    const mockGemini = async (url, options) => {
+      const parsed = JSON.parse(options.body);
+      geminiMaxTokens = parsed.max_tokens;
+      return createMockSseResponse(['Resposta teste']);
+    };
+
+    const req = new Request('http://localhost/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Como funciona o FinanceBOT?' }),
+    });
+
+    const res = await handler(req, {
+      groqFetch: mockGroq,
+      geminiFetch: mockGemini,
+      groqApiKey: 'mock-groq-key',
+      geminiApiKey: 'mock-gemini-key',
+    });
+
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(groqMaxTokens, 800, 'Groq request must configure max_tokens as 800');
+    assert.strictEqual(geminiMaxTokens, 800, 'Gemini request must configure max_tokens as 800');
   });
 });
