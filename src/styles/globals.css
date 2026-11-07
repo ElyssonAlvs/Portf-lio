@@ -155,7 +155,14 @@
   padding: 0;
 }
 
+html {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
 body {
+  overflow-x: clip;
+  max-width: 100%;
   background-color: var(--bg);
   color: var(--text-primary);
   font-family: var(--font-body);
@@ -163,7 +170,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   transition: background-color 0.2s ease, color 0.2s ease;
-  overflow-x: hidden;
   scroll-behavior: smooth;
   position: relative;
   min-height: 100vh;

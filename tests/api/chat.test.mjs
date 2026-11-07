@@ -210,7 +210,7 @@ describe('POST /api/chat - Validação e Segurança', () => {
 
   it('deve tentar a lista de modelos Groq em sequência (openai/gpt-oss-120b, openai/gpt-oss-20b, llama-3.3-70b-versatile)', async () => {
     const attempts = [];
-    const expectedGroqModels = [
+    const _expectedGroqModels = [
       'openai/gpt-oss-120b',
       'openai/gpt-oss-20b',
       'llama-3.3-70b-versatile',
